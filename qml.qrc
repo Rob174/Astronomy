@@ -1,5 +1,14 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Banniere.qml</file>
+        <file>Parametrage.qml</file>
+        <file>ParametrageForm.ui.qml</file>
+        <file>Tuile.qml</file>
+        <file>TuileHierarchie.qml</file>
+        <file>TuileHierarchieForm.ui.qml</file>
+        <file>Accueil.qml</file>
+        <file>AccueilForm.ui.qml</file>
+        <file>TuileForm.ui.qml</file>
     </qresource>
 </RCC>
