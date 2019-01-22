@@ -4,10 +4,13 @@ Item {
     id: accueil
     width: 400
     height: 400
-    signal click(string url)
+    signal clicked(string url)
+
     Grid {
         id: grid
-        anchors.fill: parent
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
         spacing: 2
         rows: 2
         columns: 2
