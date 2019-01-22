@@ -70,21 +70,21 @@ Item {
 
     Connections {
         target: tuileForm
-        onClick: click('Parametrage.qml')
+        onClicked: clicked('Parametrage.qml')
     }
 
     Connections {
         target: tuileForm1
-        onClick: click('Sortie.qml')
+        onClicked: clicked('Sortie.qml')
     }
 
     Connections {
         target: tuileForm2
-        onClick: click('Plannification.qml')
+        onClicked: clicked('Plannification.qml')
     }
 
     Connections {
         target: tuileForm3
-        onClick: click('Postsortie.qml')
+        onClicked: clicked('Postsortie.qml')
     }
 }

@@ -2,6 +2,7 @@ import QtQuick 2.4
 
 Item {
     id: item1
+    signal clicked()
     property alias item1Height: item1.height
     property alias item1Width: item1.width
     property alias text1Text: text1.text
@@ -38,7 +39,7 @@ Item {
 
     Connections {
         target: mouseArea
-        onClicked: print("clicked")
+        onClicked: clicked()
     }
 
     states: [
