@@ -5,6 +5,7 @@ os.environ["PATH"] += os.pathsep + 'D:/Program Files (x86)/Graphviz2.38/bin/'
 
 graph = Digraph(comment='Graph', format='png')#,engine="neato")
 graph.node("0","Image")
+graph.attr(fillcolor="#00000000")
 previous_id = "0"
 id = 0
 def get_current_id():

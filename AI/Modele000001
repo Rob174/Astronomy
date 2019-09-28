@@ -1,6 +1,7 @@
 // Graph
 digraph {
 	0 [label=Image]
+	fillcolor="#00000000"
 	subgraph Generator {
 		color=deepskyblue3 style=filled
 		1 [label=FFT]
