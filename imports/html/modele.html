@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.4" />
+<title>modele API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>modele</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from tensorflow.keras import models
+from tensorflow.keras.models import Model
+import numpy as np
+import tensorflow as tf
+import os
+import cv2
+import re
+class Modele_Keras:
+    &#34;&#34;&#34;
+    Couche ajoutant les fonctionnalités suivantes :
+    - Entrainement et validation automatique
+    - Sauvegarde des Métriques d&#39;entrainement et ed validation
+    - Early stoping
+    &#34;&#34;&#34;
+    def __init__(self, dic_param):
+        &#34;&#34;&#34;
+        #Arguments - Mise en place du modèle:
+            model_directory, dossier du modèle avec / à la fin
+            type_opt, str adam pour le moment
+            beta1, float valeur Adam
+            beta2, float valeur Adam
+            lr, float valeur Adam
+            type_model, enum gen, gan ou disc
+            modele, le modèle keras
+            modele_init_weights, chemin du modèle d initialisation
+        #Arguments - Metriques et evaluation        
+            layers_name_to_evaluate, list layers intermédiaire à prédire en plus lors de l évaluation
+            layers_evaluate_is_metric, list indique si la prediction indiquée ci-dessus devra être considérée comme une métrique ou une image
+            layers_evaluate_names, list les noms donnés à chaque évaluation intermédiaire
+            metriques, list les fonctions métriques keras (leur noms sera extrait des noms de fonction pour indiquer à quoi les valeurs de métrique correspondent)
+            validation_step, int le nombre d étape entre chaque validation
+        #Arguments - Sauvegarde
+            backup_step, int le nombre d iteration entre chaque enregistrement
+        #Arguments - Early stoping
+            nb_iter_degrad, int le nb d iterations telle que le jeu d entrainement à une erreur plus élevée que le jeu de validation
+            taille_buffer, int le nb d iteration considérée pour calculer la pente de la courbe d entrainement
+            pente_limite, float pente limite que la médiane de la liste ci-dessous ne doit pas dépasser
+            taille_list_pente, int nb de pentes conservées en mémoire
+        &#34;&#34;&#34;
+        assert dic_param[&#34;type_opt&#34;] == &#39;adam&#39;, &#34;Only adam supported up today&#34;
+        assert type(dic_param[&#34;beta1&#34;])==float, &#34;Must be float not %s&#34;%(dic_param[&#34;beta1&#34;])
+        assert type(dic_param[&#34;beta2&#34;])==float, &#34;Must be float not %s&#34;%(dic_param[&#34;beta2&#34;])
+        assert type(dic_param[&#34;lr&#34;])==float, &#34;Must be float not %s&#34;%(dic_param[&#34;lr&#34;])
+        assert dic_param[&#34;type_model&#34;] == &#39;gen&#39; or dic_param[&#34;type_model&#34;] == &#39;disc&#39;or dic_param[&#34;type_model&#34;] == &#39;gan&#39;, &#34;Only suited for gen, disc or gan&#34;
+        assert type(dic_param[&#34;backup_path&#34;]) == str, &#34;Invalid backup path %s&#34;%(dic_param[&#34;backup_path&#34;])
+        assert type(dic_param[&#34;backup_step&#34;]) == int, &#34;Invalid backup step %s&#34;%(dic_param[&#34;backup_step&#34;])
+        assert dic_param[&#34;metriques&#34;] != None and type(dic_param[&#34;metriques&#34;]) == list, &#34;On doit spécifier si il y a des metriques ou non et non %s&#34;%(type(dic_param[&#34;metriques&#34;]))
+        assert type(dic_param[&#34;validation_step&#34;]) == int,&#34;Invalid validation step %s&#34;%(dic_param[&#34;validation_step&#34;])
+        assert type(dic_param[&#34;layers_name_to_evaluate&#34;])==list,&#34;Veuillez passer sous forme de liste tous les noms de layers intermédiaires à évaluer (liste vide si rien en dehors des sorties par défaut) et non %s&#34;%(dic_param[&#34;layers_name_to_evaluate&#34;])
+        assert type(dic_param[&#34;layers_evaluate_names&#34;])==list,&#34;Veuillez passer sous forme de liste tous les noms des layers intermédiaires évalués (liste vide si rien en dehors des sorties par défaut) et non %s&#34;%(dic_param[&#34;layers_evaluate_names&#34;])
+        assert type(dic_param[&#34;model_directory&#34;]) == str, &#39;Veuillez entrer où seront sauvegarder les donnees du modèle et non %s&#39;%(dic_param[&#34;model_directory&#34;])
+        assert dic_param[&#34;model_directory&#34;][-1] == &#39;/&#39;, &#34;N&#39;oubliez pas le / à la fin du chemin&#34;
+        assert type(dic_param[&#34;layers_evaluate_is_metric&#34;])==list, &#34;Veuillez entrer une liste pas %s&#34;%(type(dic_param[&#34;layers_evaluate_is_metric&#34;]))
+        assert len(dic_param[&#34;layers_evaluate_is_metric&#34;])==len(dic_param[&#34;layers_evaluate_names&#34;]), &#34;La liste doit indiquer quelle prediction n&#39;est pas une image et devra être enregistrée avec les metriques donc chaque element de layers_evaluate_names doit être etiqueté et ici on a 2 liste de longueurs différentes avec %d et %d&#34;%(len(dic_param[&#34;layers_evaluate_is_metric&#34;]),len(dic_param[&#34;layers_evaluate_names&#34;]))
+        assert False not in list(map(lambda x:type(x) == bool,dic_param[&#34;layers_evaluate_is_metric&#34;])),&#34;On doit indiquer par un booleen si la prediction sera ajoutee aux metriques ou non&#34;
+        assert type(dic_param[&#34;modele_init_weights&#34;]) == str, &#34;Veuillez entrer un chemin de restoration ou &#39;&#39; si il n&#39;y a pas de restoration à faire et pas %s&#34;%(dic_param[&#34;modele_init_weights&#34;])
+        assert type(dic_param[&#34;nb_iter_degrad&#34;])==int,&#34;Veuillez entrer un nb_iter_degrad entier et non %s&#34;%(dic_param[&#34;nb_iter_degrad&#34;])
+        assert type(dic_param[&#34;taille_buffer&#34;])==int,&#34;Veuillez entrer une taille_buffer entiere et non %s&#34;%(dic_param[&#34;taille_buffer&#34;])
+        assert type(dic_param[&#34;pente_limite&#34;])==float,&#34;Veuillez entrer une pente_limite flotante et non %s&#34;%(dic_param[&#34;pente_limite&#34;])
+        assert type(dic_param[&#34;taille_list_pente&#34;])==int,&#34;Veuillez entre une taille entière de nombre de mesurre de pente à considérer et non %s&#34;%(dic_param[&#34;taille_list_pente&#34;])
+
+        self.model_backup = dic_param[&#34;model_directory&#34;]+&#39;Model&#39;+&#34;.h5&#34;
+        self.model_directory = dic_param[&#34;model_directory&#34;]
+        self.dataset = dic_param[&#34;dataset&#34;]
+        #Initialisation du modèle
+        if dic_param[&#34;type_opt&#34;] == &#39;adam&#39;:
+            self.optimisateur = tf.keras.optimizers.Adam(learning_rate=10**-dic_param[&#34;lr&#34;],
+                                                            beta_1=dic_param[&#34;beta1&#34;],
+                                                            beta_2=dic_param[&#34;beta2&#34;])
+        self.metriques_fcts = dic_param[&#34;metriques&#34;]
+        self.type_model = dic_param[&#34;type_model&#34;]
+        if dic_param[&#34;type_model&#34;] == &#39;gen&#39;:
+            self.loss = &#34;MSE&#34;
+        elif dic_param[&#34;type_model&#34;] == &#39;disc&#39;:
+            self.loss = &#34;binary_crossentropy&#34;
+        elif dic_param[&#34;type_model&#34;] == &#39;gan&#39;:
+            self.loss = &#34;binary_crossentropy&#34;
+        #Compilation du modèle
+        self.modele = dic_param[&#34;modele&#34;]
+        self.modele.compile(loss=self.loss, metrics=self.metriques_fcts,optimizer=self.optimisateur)
+        
+        if dic_param[&#34;modele_init_weights&#34;] != &#34;&#34;:
+            self.modele.load_weights(dic_param[&#34;modele_init_weights&#34;])
+        #Sauvegarde des metriques
+        self.iteration_modele = 0
+        self.liste_entrainement_iteration_globale = []#Commune à disc, gen et gan
+        #Sauvegarde du modèle
+        self.backup_path = dic_param[&#34;backup_path&#34;]
+        self.backup_step = dic_param[&#34;backup_step&#34;]
+        if os.path.exists(self.backup_path):
+            self.modele.load_weights(self.backup_path)
+        #Evaludation du modèle
+        self.validation_step = dic_param[&#34;validation_step&#34;]
+        self.validation_metrics_path = dic_param[&#34;model_directory&#34;]+&#34;validation_metrics.txt&#34;
+        self.validation_metriques_list = []
+        self.deja_evaluee = False
+        layers_output = [l.output  for l in self.modele.layers if l.name in dic_param[&#34;layers_name_to_evaluate&#34;]]
+
+        modele_eval = Model(inputs=self.modele.inputs,outputs=self.modele.outputs+layers_output)
+        modele_eval.compile(loss=&#39;binary_crossentropy&#39;,metrics=[],optimizer=&#39;Adam&#39;)
+        self.modele_eval = modele_eval
+        output_type = None
+        if self.type_model == &#39;gen&#39;:
+            output_type = [&#34;Image_generee&#34;]
+        elif self.type_model == &#39;disc&#39;:
+            output_type = [&#34;Probabilite_bruitee&#34;]
+        elif self.type_model == &#39;gan&#39;:
+            output_type = [&#34;Probabilite_bruitee&#34;]
+        self.modele_eval_names_predictions = output_type+dic_param[&#34;layers_evaluate_names&#34;]
+        #Sauvegarde des metriques
+        self.metriques_names = [self.loss]+[metric.__name__ for metric in dic_param[&#34;metriques&#34;]] + [name for name,metric in zip(dic_param[&#34;layers_evaluate_names&#34;],dic_param[&#34;layers_evaluate_is_metric&#34;]) if metric == True]
+        if self.type_model == &#39;gan&#39; or self.type_model==&#39;disc&#39;:
+            self.metriques_names += [&#34;Prediction&#34;]
+        self.path_backup_metriques = dic_param[&#34;model_directory&#34;]+&#34;training_metrics.txt&#34;
+        self.metriques_list = []
+        self.deja_enregistre = False
+        #Early stoping
+        self.nb_iter_degrad = dic_param[&#34;nb_iter_degrad&#34;]
+        self.nb_degradation = 0
+        self.taille_buffer = dic_param[&#34;taille_buffer&#34;]
+        self.buffer_early_stoping = []
+        self.pente_limite = dic_param[&#34;pente_limite&#34;]
+        self.taille_list_pente = dic_param[&#34;taille_list_pente&#34;]
+        self.list_pente = []
+        self.tr_loss = 0
+        self.break_training = False
+
+    def change_opt_param(self,beta1,beta2,lr):
+        self.optimisateur = tf.keras.optimizers.Adam(learning_rate=10**-lr,
+                                                            beta_1=beta1,
+                                                            beta_2=beta2)
+        self.modele.optimizer = self.optimisateur
+
+    def normalisation(self,array):
+        return np.array((array-np.min(array))/(np.max(array)-np.min(array)),np.float32)
+
+    def new_epoch(self):
+        self.dataset.new_epoch()
+
+    def train(self,iteration_globale):
+
+        if self.break_training == True:
+            self.new_epoch()
+            return False#Fini l&#39;epoch
+        batchs = self.dataset.next_gan_batch(&#39;tr&#39;)
+        if batchs == None:
+            self.new_epoch()
+            return False#Fini l&#39;epoch
+        gen_input, gen_output,disc_input,disc_output,gan_input,gan_output = batchs
+        input = None
+        output = None
+        if self.type_model == &#34;gen&#34;:
+            print(&#34;ATTENTION, générateur à 2 entrées (batch_input et output pour l&#39;entrée) !&#39;&#34;)
+            input = [gen_input,gen_output]#ATTENTION !!! Valable pour ce générateur uniquement
+            output = gen_output
+        elif self.type_model == &#34;disc&#34;:
+            input = disc_input
+            output = disc_output
+        elif self.type_model == &#34;gan&#34;:
+            input = [gen_input,gen_output]
+            output = gan_output
+        metriques = self.modele.train_on_batch(input,output)
+        if type(metriques) != list:
+            metriques = [metriques]
+        print(&#34;Iteration %s Loss : &#34;%(self.iteration_modele),metriques[0])
+        #Early stoping
+        if len(self.buffer_early_stoping) &lt; self.taille_buffer:
+            self.buffer_early_stoping.append(metriques[0])
+        else:
+            self.buffer_early_stoping = self.buffer_early_stoping[1:]+[metriques[0]]
+            pente = abs(max(self.buffer_early_stoping)-min(self.buffer_early_stoping))/self.taille_buffer
+            if len(self.list_pente) &lt; self.taille_list_pente:
+                self.list_pente.append(pente)
+            else:
+                self.list_pente = self.list_pente[1:]+[pente]
+        self.tr_loss = metriques[0]
+        #Enregistrement et validation
+        if self.iteration_modele % self.backup_step:
+            self.modele.save_weights(self.model_backup)
+        if self.iteration_modele % self.validation_step:
+            self.validation()
+        #self.save_metrics(metriques,type_entr=&#39;tr&#39;) ------&gt; Pose problème si des sorties intermédiaires ajoutées.
+        #Incrementation locale et globale
+        self.iteration_modele += 1
+        self.liste_entrainement_iteration_globale.append(iteration_globale)
+        return iteration_globale+1
+
+    def save_metrics(self,metriques,type_entr):
+        assert len(metriques) == len(self.metriques_names) or (type(metriques)==float and len(self.metriques_names)==1), &#34;Pas autant de metriques à l&#39;entrainement qu&#39;attendu avec %d à l&#39;entrainement contre %d normalement&#34;%(len(metriques), len(self.metriques_names))
+        assert type_entr == &#39;tr&#39; or type_entr ==&#39;v&#39; or type_entr == &#39;tst&#39;, &#34;Veuillez spécifier dans quelle type de situation on se trouve : un entrainement (tr), une évaluation pour validation (v) ou un test final (tst)&#34;
+        path = None
+        statut = None
+        metrics_list = None
+        if type_entr == &#39;tr&#39;:
+            path = self.path_backup_metriques
+            self.metriques_list.append(metriques)
+            statut = self.deja_enregistre
+            metrics_list = self.liste_entrainement_iteration_globale
+        elif type_entr == &#39;v&#39;:
+            path = self.validation_metrics_path
+            self.validation_metriques_list.append(metriques)
+            statut = self.deja_evaluee
+            metrics_list = self.validation_metriques_list
+        if statut == False:
+            with open(path,&#34;w&#34;) as f:
+                f.write(&#34;Iteration_globale,&#34;+&#34;,&#34;.join(self.metriques_names)+&#34;\n&#34;)
+            self.deja_enregistre = True
+        with open(path,&#34;a&#34;) as f: 
+            if type(metriques)==float:
+                f.write(str(self.liste_entrainement_iteration_globale[-1])+&#34;,&#34;+metrics_list+&#34;\n&#34;)
+            else:
+                f.write(str(self.liste_entrainement_iteration_globale[-1])+&#34;,&#34;+&#34;,&#34;.join(list(map(lambda x:str(x),metrics_list)))+&#34;\n&#34;)
+
+
+    def save_img(self,img_normalized,path):
+        assert type(img_normalized) == np.ndarray, &#34;Pass a numpy array&#34;
+        assert len(img_normalized.shape) == 3, &#34;Pass an img&#34;
+        assert img_normalized.shape[-1] == 3, &#34;Pass a img with 3 channels at the end to build rgb images&#34;
+        assert np.max(img_normalized) &lt;=1, &#34;Max tensor value must be 1 no %f&#34;%np.max(img_normalized)
+        individual_path = path + &#34;_iteration_modele_%d&#34;%(self.iteration_modele)
+        cv2.imwrite(individual_path+&#39;.jpg&#39;, np.uint8(img_normalized*255))
+
+
+    def validation(self):
+        batchs = self.dataset.next_gan_batch(&#39;v&#39;)
+        gen_input_clean, gen_output_clean, gen_input_noise, gen_output_noise, disc_input_clean, disc_output_clean, disc_input_noise, disc_output_noise, gan_input_clean, gan_output_clean, gan_input_noise, gan_output_noise = batchs
+        #Choix des input output en fonction du modèle
+        if self.type_model == &#34;gen&#34;:
+            print(&#34;ATTENTION, générateur à 2 entrées (batch_input et output pour l&#39;entrée) !&#39;&#34;)
+            input_clean = [gen_input_clean,gen_output_clean]#ATTENTION !!! Valable pour ce générateur uniquement
+            input_noise = [gen_input_noise,gen_input_noise]#ATTENTION !!! Valable pour ce générateur uniquement
+            output_clean = gen_output_clean
+            output_noise = gen_output_noise
+        elif self.type_model == &#34;disc&#34;:
+            input_clean = disc_input_clean
+            input_noise = disc_input_noise
+            output_clean = disc_output_clean
+            output_noise = disc_output_noise
+        elif self.type_model == &#34;gan&#34;:
+            input_clean = [gen_input_clean,gen_output_clean]#ATTENTION !!! Valable pour ce générateur uniquement
+            input_noise = [gen_input_noise,gen_input_noise]#ATTENTION !!! Valable pour ce générateur uniquement
+            output_clean = gan_output_clean
+            output_noise = gan_output_noise
+        metriques_clean = self.test_and_save(input_clean,output_clean)
+        metriques_noise = self.test_and_save(input_noise,output_noise)
+        #Early stoping
+        if max(metriques_clean[0],metriques_noise[0]) &gt; self.tr_loss:
+            self.nb_degradation += 1
+        else:
+            self.nb_degradation = max(self.nb_degradation-1,0)
+        if self.nb_degradation &gt; self.nb_iter_degrad and np.median(self.list_pente) &gt; self.pente_limite:
+            self.break_training = True
+
+    def test_and_save(self,input,output):
+        metriques = self.modele.test_on_batch(input,output)
+        if type(metriques) != list:
+            metriques = [metriques]
+        #Prediction avec le modèle de test
+        prediction = self.modele_eval.predict(input)
+        if len(prediction) != len(self.modele_eval_names_predictions) and type(prediction)!=np.ndarray:
+            raise Exception(&#34;Invalid prediction : %d names was given for the ouputs but %d has been generated&#34;%(len(self.modele_eval_names_predictions),len(prediction)))
+        for predic,name in zip(prediction,self.modele_eval_names_predictions):
+            if len(predic.shape) == 4: #Si c&#39;est un batch d&#39;img
+                for img_index in range(predic.shape[0]):
+                    self.save_img(self.normalisation(predic[img_index,:,:,:]),self.model_directory+&#39;_&#39;+name+&#39;iter_modele_&#39;+str(self.iteration_modele))
+            elif len(predic.shape) == 2:#C&#39;est une prediction numérique
+                metriques.append(array_to_str(x))
+        print(&#34;metriques : &#34;,metriques)
+        print(&#34;longueur : &#34;,len(metriques))
+        print(&#34;Outputs : &#34;,self.modele.output)
+        self.save_metrics(metriques,type_entr=&#39;v&#39;)
+        return metriques
+    def array_to_str(array):
+        &#34;&#34;&#34;
+        Met en string une array. Applatit l&#39;array et met la forme en début
+        &#34;&#34;&#34;
+        array = np.array(array)
+        s = list(array.shape)
+        flat =  list(array.flatten())
+        chaine = &#34;__&#34;
+        print(s)
+        chaine +=&#34;_&#34;.join(list(map(lambda x:str(x),s)))+&#34;__&#34;
+        chaine +=&#34;|&#34;.join(list(map(lambda x:str(x),flat)))
+        return chaine
+    def str_to_array(chaine):
+        [_,shape,array] = chaine.split(&#34;__&#34;)
+        shape = list(map(lambda x:int(x),shape.split(&#34;_&#34;)))
+        array = list(map(lambda x:float(x),array.split(&#34;|&#34;)))
+        print(array)
+        array = np.array(array).reshape(shape)
+        return array</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="modele.Modele_Keras"><code class="flex name class">
+<span>class <span class="ident">Modele_Keras</span></span>
+<span>(</span><span>dic_param)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Couche ajoutant les fonctionnalités suivantes :
+- Entrainement et validation automatique
+- Sauvegarde des Métriques d'entrainement et ed validation
+- Early stoping</p>
+<h1 id="arguments-mise-en-place-du-modele">Arguments - Mise en place du modèle:</h1>
+<pre><code>model_directory, dossier du modèle avec / à la fin
+type_opt, str adam pour le moment
+beta1, float valeur Adam
+beta2, float valeur Adam
+lr, float valeur Adam
+type_model, enum gen, gan ou disc
+modele, le modèle keras
+modele_init_weights, chemin du modèle d initialisation
+</code></pre>
+<h1 id="arguments-metriques-et-evaluation">Arguments - Metriques et evaluation</h1>
+<pre><code>layers_name_to_evaluate, list layers intermédiaire à prédire en plus lors de l évaluation
+layers_evaluate_is_metric, list indique si la prediction indiquée ci-dessus devra être considérée comme une métrique ou une image
+layers_evaluate_names, list les noms donnés à chaque évaluation intermédiaire
+metriques, list les fonctions métriques keras (leur noms sera extrait des noms de fonction pour indiquer à quoi les valeurs de métrique correspondent)
+validation_step, int le nombre d étape entre chaque validation
+</code></pre>
+<h1 id="arguments-sauvegarde">Arguments - Sauvegarde</h1>
+<pre><code>backup_step, int le nombre d iteration entre chaque enregistrement
+</code></pre>
+<h1 id="arguments-early-stoping">Arguments - Early stoping</h1>
+<pre><code>nb_iter_degrad, int le nb d iterations telle que le jeu d entrainement à une erreur plus élevée que le jeu de validation
+taille_buffer, int le nb d iteration considérée pour calculer la pente de la courbe d entrainement
+pente_limite, float pente limite que la médiane de la liste ci-dessous ne doit pas dépasser
+taille_list_pente, int nb de pentes conservées en mémoire
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Modele_Keras:
+    &#34;&#34;&#34;
+    Couche ajoutant les fonctionnalités suivantes :
+    - Entrainement et validation automatique
+    - Sauvegarde des Métriques d&#39;entrainement et ed validation
+    - Early stoping
+    &#34;&#34;&#34;
+    def __init__(self, dic_param):
+        &#34;&#34;&#34;
+        #Arguments - Mise en place du modèle:
+            model_directory, dossier du modèle avec / à la fin
+            type_opt, str adam pour le moment
+            beta1, float valeur Adam
+            beta2, float valeur Adam
+            lr, float valeur Adam
+            type_model, enum gen, gan ou disc
+            modele, le modèle keras
+            modele_init_weights, chemin du modèle d initialisation
+        #Arguments - Metriques et evaluation        
+            layers_name_to_evaluate, list layers intermédiaire à prédire en plus lors de l évaluation
+            layers_evaluate_is_metric, list indique si la prediction indiquée ci-dessus devra être considérée comme une métrique ou une image
+            layers_evaluate_names, list les noms donnés à chaque évaluation intermédiaire
+            metriques, list les fonctions métriques keras (leur noms sera extrait des noms de fonction pour indiquer à quoi les valeurs de métrique correspondent)
+            validation_step, int le nombre d étape entre chaque validation
+        #Arguments - Sauvegarde
+            backup_step, int le nombre d iteration entre chaque enregistrement
+        #Arguments - Early stoping
+            nb_iter_degrad, int le nb d iterations telle que le jeu d entrainement à une erreur plus élevée que le jeu de validation
+            taille_buffer, int le nb d iteration considérée pour calculer la pente de la courbe d entrainement
+            pente_limite, float pente limite que la médiane de la liste ci-dessous ne doit pas dépasser
+            taille_list_pente, int nb de pentes conservées en mémoire
+        &#34;&#34;&#34;
+        assert dic_param[&#34;type_opt&#34;] == &#39;adam&#39;, &#34;Only adam supported up today&#34;
+        assert type(dic_param[&#34;beta1&#34;])==float, &#34;Must be float not %s&#34;%(dic_param[&#34;beta1&#34;])
+        assert type(dic_param[&#34;beta2&#34;])==float, &#34;Must be float not %s&#34;%(dic_param[&#34;beta2&#34;])
+        assert type(dic_param[&#34;lr&#34;])==float, &#34;Must be float not %s&#34;%(dic_param[&#34;lr&#34;])
+        assert dic_param[&#34;type_model&#34;] == &#39;gen&#39; or dic_param[&#34;type_model&#34;] == &#39;disc&#39;or dic_param[&#34;type_model&#34;] == &#39;gan&#39;, &#34;Only suited for gen, disc or gan&#34;
+        assert type(dic_param[&#34;backup_path&#34;]) == str, &#34;Invalid backup path %s&#34;%(dic_param[&#34;backup_path&#34;])
+        assert type(dic_param[&#34;backup_step&#34;]) == int, &#34;Invalid backup step %s&#34;%(dic_param[&#34;backup_step&#34;])
+        assert dic_param[&#34;metriques&#34;] != None and type(dic_param[&#34;metriques&#34;]) == list, &#34;On doit spécifier si il y a des metriques ou non et non %s&#34;%(type(dic_param[&#34;metriques&#34;]))
+        assert type(dic_param[&#34;validation_step&#34;]) == int,&#34;Invalid validation step %s&#34;%(dic_param[&#34;validation_step&#34;])
+        assert type(dic_param[&#34;layers_name_to_evaluate&#34;])==list,&#34;Veuillez passer sous forme de liste tous les noms de layers intermédiaires à évaluer (liste vide si rien en dehors des sorties par défaut) et non %s&#34;%(dic_param[&#34;layers_name_to_evaluate&#34;])
+        assert type(dic_param[&#34;layers_evaluate_names&#34;])==list,&#34;Veuillez passer sous forme de liste tous les noms des layers intermédiaires évalués (liste vide si rien en dehors des sorties par défaut) et non %s&#34;%(dic_param[&#34;layers_evaluate_names&#34;])
+        assert type(dic_param[&#34;model_directory&#34;]) == str, &#39;Veuillez entrer où seront sauvegarder les donnees du modèle et non %s&#39;%(dic_param[&#34;model_directory&#34;])
+        assert dic_param[&#34;model_directory&#34;][-1] == &#39;/&#39;, &#34;N&#39;oubliez pas le / à la fin du chemin&#34;
+        assert type(dic_param[&#34;layers_evaluate_is_metric&#34;])==list, &#34;Veuillez entrer une liste pas %s&#34;%(type(dic_param[&#34;layers_evaluate_is_metric&#34;]))
+        assert len(dic_param[&#34;layers_evaluate_is_metric&#34;])==len(dic_param[&#34;layers_evaluate_names&#34;]), &#34;La liste doit indiquer quelle prediction n&#39;est pas une image et devra être enregistrée avec les metriques donc chaque element de layers_evaluate_names doit être etiqueté et ici on a 2 liste de longueurs différentes avec %d et %d&#34;%(len(dic_param[&#34;layers_evaluate_is_metric&#34;]),len(dic_param[&#34;layers_evaluate_names&#34;]))
+        assert False not in list(map(lambda x:type(x) == bool,dic_param[&#34;layers_evaluate_is_metric&#34;])),&#34;On doit indiquer par un booleen si la prediction sera ajoutee aux metriques ou non&#34;
+        assert type(dic_param[&#34;modele_init_weights&#34;]) == str, &#34;Veuillez entrer un chemin de restoration ou &#39;&#39; si il n&#39;y a pas de restoration à faire et pas %s&#34;%(dic_param[&#34;modele_init_weights&#34;])
+        assert type(dic_param[&#34;nb_iter_degrad&#34;])==int,&#34;Veuillez entrer un nb_iter_degrad entier et non %s&#34;%(dic_param[&#34;nb_iter_degrad&#34;])
+        assert type(dic_param[&#34;taille_buffer&#34;])==int,&#34;Veuillez entrer une taille_buffer entiere et non %s&#34;%(dic_param[&#34;taille_buffer&#34;])
+        assert type(dic_param[&#34;pente_limite&#34;])==float,&#34;Veuillez entrer une pente_limite flotante et non %s&#34;%(dic_param[&#34;pente_limite&#34;])
+        assert type(dic_param[&#34;taille_list_pente&#34;])==int,&#34;Veuillez entre une taille entière de nombre de mesurre de pente à considérer et non %s&#34;%(dic_param[&#34;taille_list_pente&#34;])
+
+        self.model_backup = dic_param[&#34;model_directory&#34;]+&#39;Model&#39;+&#34;.h5&#34;
+        self.model_directory = dic_param[&#34;model_directory&#34;]
+        self.dataset = dic_param[&#34;dataset&#34;]
+        #Initialisation du modèle
+        if dic_param[&#34;type_opt&#34;] == &#39;adam&#39;:
+            self.optimisateur = tf.keras.optimizers.Adam(learning_rate=10**-dic_param[&#34;lr&#34;],
+                                                            beta_1=dic_param[&#34;beta1&#34;],
+                                                            beta_2=dic_param[&#34;beta2&#34;])
+        self.metriques_fcts = dic_param[&#34;metriques&#34;]
+        self.type_model = dic_param[&#34;type_model&#34;]
+        if dic_param[&#34;type_model&#34;] == &#39;gen&#39;:
+            self.loss = &#34;MSE&#34;
+        elif dic_param[&#34;type_model&#34;] == &#39;disc&#39;:
+            self.loss = &#34;binary_crossentropy&#34;
+        elif dic_param[&#34;type_model&#34;] == &#39;gan&#39;:
+            self.loss = &#34;binary_crossentropy&#34;
+        #Compilation du modèle
+        self.modele = dic_param[&#34;modele&#34;]
+        self.modele.compile(loss=self.loss, metrics=self.metriques_fcts,optimizer=self.optimisateur)
+        
+        if dic_param[&#34;modele_init_weights&#34;] != &#34;&#34;:
+            self.modele.load_weights(dic_param[&#34;modele_init_weights&#34;])
+        #Sauvegarde des metriques
+        self.iteration_modele = 0
+        self.liste_entrainement_iteration_globale = []#Commune à disc, gen et gan
+        #Sauvegarde du modèle
+        self.backup_path = dic_param[&#34;backup_path&#34;]
+        self.backup_step = dic_param[&#34;backup_step&#34;]
+        if os.path.exists(self.backup_path):
+            self.modele.load_weights(self.backup_path)
+        #Evaludation du modèle
+        self.validation_step = dic_param[&#34;validation_step&#34;]
+        self.validation_metrics_path = dic_param[&#34;model_directory&#34;]+&#34;validation_metrics.txt&#34;
+        self.validation_metriques_list = []
+        self.deja_evaluee = False
+        layers_output = [l.output  for l in self.modele.layers if l.name in dic_param[&#34;layers_name_to_evaluate&#34;]]
+
+        modele_eval = Model(inputs=self.modele.inputs,outputs=self.modele.outputs+layers_output)
+        modele_eval.compile(loss=&#39;binary_crossentropy&#39;,metrics=[],optimizer=&#39;Adam&#39;)
+        self.modele_eval = modele_eval
+        output_type = None
+        if self.type_model == &#39;gen&#39;:
+            output_type = [&#34;Image_generee&#34;]
+        elif self.type_model == &#39;disc&#39;:
+            output_type = [&#34;Probabilite_bruitee&#34;]
+        elif self.type_model == &#39;gan&#39;:
+            output_type = [&#34;Probabilite_bruitee&#34;]
+        self.modele_eval_names_predictions = output_type+dic_param[&#34;layers_evaluate_names&#34;]
+        #Sauvegarde des metriques
+        self.metriques_names = [self.loss]+[metric.__name__ for metric in dic_param[&#34;metriques&#34;]] + [name for name,metric in zip(dic_param[&#34;layers_evaluate_names&#34;],dic_param[&#34;layers_evaluate_is_metric&#34;]) if metric == True]
+        if self.type_model == &#39;gan&#39; or self.type_model==&#39;disc&#39;:
+            self.metriques_names += [&#34;Prediction&#34;]
+        self.path_backup_metriques = dic_param[&#34;model_directory&#34;]+&#34;training_metrics.txt&#34;
+        self.metriques_list = []
+        self.deja_enregistre = False
+        #Early stoping
+        self.nb_iter_degrad = dic_param[&#34;nb_iter_degrad&#34;]
+        self.nb_degradation = 0
+        self.taille_buffer = dic_param[&#34;taille_buffer&#34;]
+        self.buffer_early_stoping = []
+        self.pente_limite = dic_param[&#34;pente_limite&#34;]
+        self.taille_list_pente = dic_param[&#34;taille_list_pente&#34;]
+        self.list_pente = []
+        self.tr_loss = 0
+        self.break_training = False
+
+    def change_opt_param(self,beta1,beta2,lr):
+        self.optimisateur = tf.keras.optimizers.Adam(learning_rate=10**-lr,
+                                                            beta_1=beta1,
+                                                            beta_2=beta2)
+        self.modele.optimizer = self.optimisateur
+
+    def normalisation(self,array):
+        return np.array((array-np.min(array))/(np.max(array)-np.min(array)),np.float32)
+
+    def new_epoch(self):
+        self.dataset.new_epoch()
+
+    def train(self,iteration_globale):
+
+        if self.break_training == True:
+            self.new_epoch()
+            return False#Fini l&#39;epoch
+        batchs = self.dataset.next_gan_batch(&#39;tr&#39;)
+        if batchs == None:
+            self.new_epoch()
+            return False#Fini l&#39;epoch
+        gen_input, gen_output,disc_input,disc_output,gan_input,gan_output = batchs
+        input = None
+        output = None
+        if self.type_model == &#34;gen&#34;:
+            print(&#34;ATTENTION, générateur à 2 entrées (batch_input et output pour l&#39;entrée) !&#39;&#34;)
+            input = [gen_input,gen_output]#ATTENTION !!! Valable pour ce générateur uniquement
+            output = gen_output
+        elif self.type_model == &#34;disc&#34;:
+            input = disc_input
+            output = disc_output
+        elif self.type_model == &#34;gan&#34;:
+            input = [gen_input,gen_output]
+            output = gan_output
+        metriques = self.modele.train_on_batch(input,output)
+        if type(metriques) != list:
+            metriques = [metriques]
+        print(&#34;Iteration %s Loss : &#34;%(self.iteration_modele),metriques[0])
+        #Early stoping
+        if len(self.buffer_early_stoping) &lt; self.taille_buffer:
+            self.buffer_early_stoping.append(metriques[0])
+        else:
+            self.buffer_early_stoping = self.buffer_early_stoping[1:]+[metriques[0]]
+            pente = abs(max(self.buffer_early_stoping)-min(self.buffer_early_stoping))/self.taille_buffer
+            if len(self.list_pente) &lt; self.taille_list_pente:
+                self.list_pente.append(pente)
+            else:
+                self.list_pente = self.list_pente[1:]+[pente]
+        self.tr_loss = metriques[0]
+        #Enregistrement et validation
+        if self.iteration_modele % self.backup_step:
+            self.modele.save_weights(self.model_backup)
+        if self.iteration_modele % self.validation_step:
+            self.validation()
+        #self.save_metrics(metriques,type_entr=&#39;tr&#39;) ------&gt; Pose problème si des sorties intermédiaires ajoutées.
+        #Incrementation locale et globale
+        self.iteration_modele += 1
+        self.liste_entrainement_iteration_globale.append(iteration_globale)
+        return iteration_globale+1
+
+    def save_metrics(self,metriques,type_entr):
+        assert len(metriques) == len(self.metriques_names) or (type(metriques)==float and len(self.metriques_names)==1), &#34;Pas autant de metriques à l&#39;entrainement qu&#39;attendu avec %d à l&#39;entrainement contre %d normalement&#34;%(len(metriques), len(self.metriques_names))
+        assert type_entr == &#39;tr&#39; or type_entr ==&#39;v&#39; or type_entr == &#39;tst&#39;, &#34;Veuillez spécifier dans quelle type de situation on se trouve : un entrainement (tr), une évaluation pour validation (v) ou un test final (tst)&#34;
+        path = None
+        statut = None
+        metrics_list = None
+        if type_entr == &#39;tr&#39;:
+            path = self.path_backup_metriques
+            self.metriques_list.append(metriques)
+            statut = self.deja_enregistre
+            metrics_list = self.liste_entrainement_iteration_globale
+        elif type_entr == &#39;v&#39;:
+            path = self.validation_metrics_path
+            self.validation_metriques_list.append(metriques)
+            statut = self.deja_evaluee
+            metrics_list = self.validation_metriques_list
+        if statut == False:
+            with open(path,&#34;w&#34;) as f:
+                f.write(&#34;Iteration_globale,&#34;+&#34;,&#34;.join(self.metriques_names)+&#34;\n&#34;)
+            self.deja_enregistre = True
+        with open(path,&#34;a&#34;) as f: 
+            if type(metriques)==float:
+                f.write(str(self.liste_entrainement_iteration_globale[-1])+&#34;,&#34;+metrics_list+&#34;\n&#34;)
+            else:
+                f.write(str(self.liste_entrainement_iteration_globale[-1])+&#34;,&#34;+&#34;,&#34;.join(list(map(lambda x:str(x),metrics_list)))+&#34;\n&#34;)
+
+
+    def save_img(self,img_normalized,path):
+        assert type(img_normalized) == np.ndarray, &#34;Pass a numpy array&#34;
+        assert len(img_normalized.shape) == 3, &#34;Pass an img&#34;
+        assert img_normalized.shape[-1] == 3, &#34;Pass a img with 3 channels at the end to build rgb images&#34;
+        assert np.max(img_normalized) &lt;=1, &#34;Max tensor value must be 1 no %f&#34;%np.max(img_normalized)
+        individual_path = path + &#34;_iteration_modele_%d&#34;%(self.iteration_modele)
+        cv2.imwrite(individual_path+&#39;.jpg&#39;, np.uint8(img_normalized*255))
+
+
+    def validation(self):
+        batchs = self.dataset.next_gan_batch(&#39;v&#39;)
+        gen_input_clean, gen_output_clean, gen_input_noise, gen_output_noise, disc_input_clean, disc_output_clean, disc_input_noise, disc_output_noise, gan_input_clean, gan_output_clean, gan_input_noise, gan_output_noise = batchs
+        #Choix des input output en fonction du modèle
+        if self.type_model == &#34;gen&#34;:
+            print(&#34;ATTENTION, générateur à 2 entrées (batch_input et output pour l&#39;entrée) !&#39;&#34;)
+            input_clean = [gen_input_clean,gen_output_clean]#ATTENTION !!! Valable pour ce générateur uniquement
+            input_noise = [gen_input_noise,gen_input_noise]#ATTENTION !!! Valable pour ce générateur uniquement
+            output_clean = gen_output_clean
+            output_noise = gen_output_noise
+        elif self.type_model == &#34;disc&#34;:
+            input_clean = disc_input_clean
+            input_noise = disc_input_noise
+            output_clean = disc_output_clean
+            output_noise = disc_output_noise
+        elif self.type_model == &#34;gan&#34;:
+            input_clean = [gen_input_clean,gen_output_clean]#ATTENTION !!! Valable pour ce générateur uniquement
+            input_noise = [gen_input_noise,gen_input_noise]#ATTENTION !!! Valable pour ce générateur uniquement
+            output_clean = gan_output_clean
+            output_noise = gan_output_noise
+        metriques_clean = self.test_and_save(input_clean,output_clean)
+        metriques_noise = self.test_and_save(input_noise,output_noise)
+        #Early stoping
+        if max(metriques_clean[0],metriques_noise[0]) &gt; self.tr_loss:
+            self.nb_degradation += 1
+        else:
+            self.nb_degradation = max(self.nb_degradation-1,0)
+        if self.nb_degradation &gt; self.nb_iter_degrad and np.median(self.list_pente) &gt; self.pente_limite:
+            self.break_training = True
+
+    def test_and_save(self,input,output):
+        metriques = self.modele.test_on_batch(input,output)
+        if type(metriques) != list:
+            metriques = [metriques]
+        #Prediction avec le modèle de test
+        prediction = self.modele_eval.predict(input)
+        if len(prediction) != len(self.modele_eval_names_predictions) and type(prediction)!=np.ndarray:
+            raise Exception(&#34;Invalid prediction : %d names was given for the ouputs but %d has been generated&#34;%(len(self.modele_eval_names_predictions),len(prediction)))
+        for predic,name in zip(prediction,self.modele_eval_names_predictions):
+            if len(predic.shape) == 4: #Si c&#39;est un batch d&#39;img
+                for img_index in range(predic.shape[0]):
+                    self.save_img(self.normalisation(predic[img_index,:,:,:]),self.model_directory+&#39;_&#39;+name+&#39;iter_modele_&#39;+str(self.iteration_modele))
+            elif len(predic.shape) == 2:#C&#39;est une prediction numérique
+                metriques.append(array_to_str(x))
+        print(&#34;metriques : &#34;,metriques)
+        print(&#34;longueur : &#34;,len(metriques))
+        print(&#34;Outputs : &#34;,self.modele.output)
+        self.save_metrics(metriques,type_entr=&#39;v&#39;)
+        return metriques
+    def array_to_str(array):
+        &#34;&#34;&#34;
+        Met en string une array. Applatit l&#39;array et met la forme en début
+        &#34;&#34;&#34;
+        array = np.array(array)
+        s = list(array.shape)
+        flat =  list(array.flatten())
+        chaine = &#34;__&#34;
+        print(s)
+        chaine +=&#34;_&#34;.join(list(map(lambda x:str(x),s)))+&#34;__&#34;
+        chaine +=&#34;|&#34;.join(list(map(lambda x:str(x),flat)))
+        return chaine
+    def str_to_array(chaine):
+        [_,shape,array] = chaine.split(&#34;__&#34;)
+        shape = list(map(lambda x:int(x),shape.split(&#34;_&#34;)))
+        array = list(map(lambda x:float(x),array.split(&#34;|&#34;)))
+        print(array)
+        array = np.array(array).reshape(shape)
+        return array</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="modele.Modele_Keras.array_to_str"><code class="name flex">
+<span>def <span class="ident">array_to_str</span></span>(<span>array)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Met en string une array. Applatit l'array et met la forme en début</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def array_to_str(array):
+    &#34;&#34;&#34;
+    Met en string une array. Applatit l&#39;array et met la forme en début
+    &#34;&#34;&#34;
+    array = np.array(array)
+    s = list(array.shape)
+    flat =  list(array.flatten())
+    chaine = &#34;__&#34;
+    print(s)
+    chaine +=&#34;_&#34;.join(list(map(lambda x:str(x),s)))+&#34;__&#34;
+    chaine +=&#34;|&#34;.join(list(map(lambda x:str(x),flat)))
+    return chaine</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.change_opt_param"><code class="name flex">
+<span>def <span class="ident">change_opt_param</span></span>(<span>self, beta1, beta2, lr)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def change_opt_param(self,beta1,beta2,lr):
+    self.optimisateur = tf.keras.optimizers.Adam(learning_rate=10**-lr,
+                                                        beta_1=beta1,
+                                                        beta_2=beta2)
+    self.modele.optimizer = self.optimisateur</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.new_epoch"><code class="name flex">
+<span>def <span class="ident">new_epoch</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def new_epoch(self):
+    self.dataset.new_epoch()</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.normalisation"><code class="name flex">
+<span>def <span class="ident">normalisation</span></span>(<span>self, array)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalisation(self,array):
+    return np.array((array-np.min(array))/(np.max(array)-np.min(array)),np.float32)</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.save_img"><code class="name flex">
+<span>def <span class="ident">save_img</span></span>(<span>self, img_normalized, path)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_img(self,img_normalized,path):
+    assert type(img_normalized) == np.ndarray, &#34;Pass a numpy array&#34;
+    assert len(img_normalized.shape) == 3, &#34;Pass an img&#34;
+    assert img_normalized.shape[-1] == 3, &#34;Pass a img with 3 channels at the end to build rgb images&#34;
+    assert np.max(img_normalized) &lt;=1, &#34;Max tensor value must be 1 no %f&#34;%np.max(img_normalized)
+    individual_path = path + &#34;_iteration_modele_%d&#34;%(self.iteration_modele)
+    cv2.imwrite(individual_path+&#39;.jpg&#39;, np.uint8(img_normalized*255))</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.save_metrics"><code class="name flex">
+<span>def <span class="ident">save_metrics</span></span>(<span>self, metriques, type_entr)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_metrics(self,metriques,type_entr):
+    assert len(metriques) == len(self.metriques_names) or (type(metriques)==float and len(self.metriques_names)==1), &#34;Pas autant de metriques à l&#39;entrainement qu&#39;attendu avec %d à l&#39;entrainement contre %d normalement&#34;%(len(metriques), len(self.metriques_names))
+    assert type_entr == &#39;tr&#39; or type_entr ==&#39;v&#39; or type_entr == &#39;tst&#39;, &#34;Veuillez spécifier dans quelle type de situation on se trouve : un entrainement (tr), une évaluation pour validation (v) ou un test final (tst)&#34;
+    path = None
+    statut = None
+    metrics_list = None
+    if type_entr == &#39;tr&#39;:
+        path = self.path_backup_metriques
+        self.metriques_list.append(metriques)
+        statut = self.deja_enregistre
+        metrics_list = self.liste_entrainement_iteration_globale
+    elif type_entr == &#39;v&#39;:
+        path = self.validation_metrics_path
+        self.validation_metriques_list.append(metriques)
+        statut = self.deja_evaluee
+        metrics_list = self.validation_metriques_list
+    if statut == False:
+        with open(path,&#34;w&#34;) as f:
+            f.write(&#34;Iteration_globale,&#34;+&#34;,&#34;.join(self.metriques_names)+&#34;\n&#34;)
+        self.deja_enregistre = True
+    with open(path,&#34;a&#34;) as f: 
+        if type(metriques)==float:
+            f.write(str(self.liste_entrainement_iteration_globale[-1])+&#34;,&#34;+metrics_list+&#34;\n&#34;)
+        else:
+            f.write(str(self.liste_entrainement_iteration_globale[-1])+&#34;,&#34;+&#34;,&#34;.join(list(map(lambda x:str(x),metrics_list)))+&#34;\n&#34;)</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.str_to_array"><code class="name flex">
+<span>def <span class="ident">str_to_array</span></span>(<span>chaine)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def str_to_array(chaine):
+    [_,shape,array] = chaine.split(&#34;__&#34;)
+    shape = list(map(lambda x:int(x),shape.split(&#34;_&#34;)))
+    array = list(map(lambda x:float(x),array.split(&#34;|&#34;)))
+    print(array)
+    array = np.array(array).reshape(shape)
+    return array</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.test_and_save"><code class="name flex">
+<span>def <span class="ident">test_and_save</span></span>(<span>self, input, output)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_and_save(self,input,output):
+    metriques = self.modele.test_on_batch(input,output)
+    if type(metriques) != list:
+        metriques = [metriques]
+    #Prediction avec le modèle de test
+    prediction = self.modele_eval.predict(input)
+    if len(prediction) != len(self.modele_eval_names_predictions) and type(prediction)!=np.ndarray:
+        raise Exception(&#34;Invalid prediction : %d names was given for the ouputs but %d has been generated&#34;%(len(self.modele_eval_names_predictions),len(prediction)))
+    for predic,name in zip(prediction,self.modele_eval_names_predictions):
+        if len(predic.shape) == 4: #Si c&#39;est un batch d&#39;img
+            for img_index in range(predic.shape[0]):
+                self.save_img(self.normalisation(predic[img_index,:,:,:]),self.model_directory+&#39;_&#39;+name+&#39;iter_modele_&#39;+str(self.iteration_modele))
+        elif len(predic.shape) == 2:#C&#39;est une prediction numérique
+            metriques.append(array_to_str(x))
+    print(&#34;metriques : &#34;,metriques)
+    print(&#34;longueur : &#34;,len(metriques))
+    print(&#34;Outputs : &#34;,self.modele.output)
+    self.save_metrics(metriques,type_entr=&#39;v&#39;)
+    return metriques</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.train"><code class="name flex">
+<span>def <span class="ident">train</span></span>(<span>self, iteration_globale)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train(self,iteration_globale):
+
+    if self.break_training == True:
+        self.new_epoch()
+        return False#Fini l&#39;epoch
+    batchs = self.dataset.next_gan_batch(&#39;tr&#39;)
+    if batchs == None:
+        self.new_epoch()
+        return False#Fini l&#39;epoch
+    gen_input, gen_output,disc_input,disc_output,gan_input,gan_output = batchs
+    input = None
+    output = None
+    if self.type_model == &#34;gen&#34;:
+        print(&#34;ATTENTION, générateur à 2 entrées (batch_input et output pour l&#39;entrée) !&#39;&#34;)
+        input = [gen_input,gen_output]#ATTENTION !!! Valable pour ce générateur uniquement
+        output = gen_output
+    elif self.type_model == &#34;disc&#34;:
+        input = disc_input
+        output = disc_output
+    elif self.type_model == &#34;gan&#34;:
+        input = [gen_input,gen_output]
+        output = gan_output
+    metriques = self.modele.train_on_batch(input,output)
+    if type(metriques) != list:
+        metriques = [metriques]
+    print(&#34;Iteration %s Loss : &#34;%(self.iteration_modele),metriques[0])
+    #Early stoping
+    if len(self.buffer_early_stoping) &lt; self.taille_buffer:
+        self.buffer_early_stoping.append(metriques[0])
+    else:
+        self.buffer_early_stoping = self.buffer_early_stoping[1:]+[metriques[0]]
+        pente = abs(max(self.buffer_early_stoping)-min(self.buffer_early_stoping))/self.taille_buffer
+        if len(self.list_pente) &lt; self.taille_list_pente:
+            self.list_pente.append(pente)
+        else:
+            self.list_pente = self.list_pente[1:]+[pente]
+    self.tr_loss = metriques[0]
+    #Enregistrement et validation
+    if self.iteration_modele % self.backup_step:
+        self.modele.save_weights(self.model_backup)
+    if self.iteration_modele % self.validation_step:
+        self.validation()
+    #self.save_metrics(metriques,type_entr=&#39;tr&#39;) ------&gt; Pose problème si des sorties intermédiaires ajoutées.
+    #Incrementation locale et globale
+    self.iteration_modele += 1
+    self.liste_entrainement_iteration_globale.append(iteration_globale)
+    return iteration_globale+1</code></pre>
+</details>
+</dd>
+<dt id="modele.Modele_Keras.validation"><code class="name flex">
+<span>def <span class="ident">validation</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validation(self):
+    batchs = self.dataset.next_gan_batch(&#39;v&#39;)
+    gen_input_clean, gen_output_clean, gen_input_noise, gen_output_noise, disc_input_clean, disc_output_clean, disc_input_noise, disc_output_noise, gan_input_clean, gan_output_clean, gan_input_noise, gan_output_noise = batchs
+    #Choix des input output en fonction du modèle
+    if self.type_model == &#34;gen&#34;:
+        print(&#34;ATTENTION, générateur à 2 entrées (batch_input et output pour l&#39;entrée) !&#39;&#34;)
+        input_clean = [gen_input_clean,gen_output_clean]#ATTENTION !!! Valable pour ce générateur uniquement
+        input_noise = [gen_input_noise,gen_input_noise]#ATTENTION !!! Valable pour ce générateur uniquement
+        output_clean = gen_output_clean
+        output_noise = gen_output_noise
+    elif self.type_model == &#34;disc&#34;:
+        input_clean = disc_input_clean
+        input_noise = disc_input_noise
+        output_clean = disc_output_clean
+        output_noise = disc_output_noise
+    elif self.type_model == &#34;gan&#34;:
+        input_clean = [gen_input_clean,gen_output_clean]#ATTENTION !!! Valable pour ce générateur uniquement
+        input_noise = [gen_input_noise,gen_input_noise]#ATTENTION !!! Valable pour ce générateur uniquement
+        output_clean = gan_output_clean
+        output_noise = gan_output_noise
+    metriques_clean = self.test_and_save(input_clean,output_clean)
+    metriques_noise = self.test_and_save(input_noise,output_noise)
+    #Early stoping
+    if max(metriques_clean[0],metriques_noise[0]) &gt; self.tr_loss:
+        self.nb_degradation += 1
+    else:
+        self.nb_degradation = max(self.nb_degradation-1,0)
+    if self.nb_degradation &gt; self.nb_iter_degrad and np.median(self.list_pente) &gt; self.pente_limite:
+        self.break_training = True</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="modele.Modele_Keras" href="#modele.Modele_Keras">Modele_Keras</a></code></h4>
+<ul class="two-column">
+<li><code><a title="modele.Modele_Keras.array_to_str" href="#modele.Modele_Keras.array_to_str">array_to_str</a></code></li>
+<li><code><a title="modele.Modele_Keras.change_opt_param" href="#modele.Modele_Keras.change_opt_param">change_opt_param</a></code></li>
+<li><code><a title="modele.Modele_Keras.new_epoch" href="#modele.Modele_Keras.new_epoch">new_epoch</a></code></li>
+<li><code><a title="modele.Modele_Keras.normalisation" href="#modele.Modele_Keras.normalisation">normalisation</a></code></li>
+<li><code><a title="modele.Modele_Keras.save_img" href="#modele.Modele_Keras.save_img">save_img</a></code></li>
+<li><code><a title="modele.Modele_Keras.save_metrics" href="#modele.Modele_Keras.save_metrics">save_metrics</a></code></li>
+<li><code><a title="modele.Modele_Keras.str_to_array" href="#modele.Modele_Keras.str_to_array">str_to_array</a></code></li>
+<li><code><a title="modele.Modele_Keras.test_and_save" href="#modele.Modele_Keras.test_and_save">test_and_save</a></code></li>
+<li><code><a title="modele.Modele_Keras.train" href="#modele.Modele_Keras.train">train</a></code></li>
+<li><code><a title="modele.Modele_Keras.validation" href="#modele.Modele_Keras.validation">validation</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

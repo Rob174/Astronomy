@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.4" />
+<title>input_setup API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>input_setup</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import os
+import cv2
+import numpy as np
+import time
+class Dataset:
+    &#34;&#34;&#34;Gère les 3 dataset de test, validation et entrainement&#34;&#34;&#34;
+    def __init__(self, localisation_annexe_txt,train_rate=0.7, validation_rate=0.2, test_rate=0.1, batch_size=10, taille_img=256, nb_open_err=10, verification_err=True):
+        &#34;&#34;&#34;
+        #Arguments
+            localisation_annexe_txt: string chemin relatif depuis le dossier TIPE
+            train_rate: float entre 0 et 1 pourcentage des données consacrées à l&#39;entrainement
+            validation_rate: float entre 0 et 1 pourcentage des données consacrées à la validation
+            test_rate: float entre 0 et 1 pourcentage des données consacrées aux tests
+            batch_size: int &gt; 0 nombre d&#39;image passées simultannément dans le réseau
+            taille_img: int &gt; 0 fortement recommendé d&#39;être une puissance de 2 pour ne pas avoir de problème si on a besoin d&#39;utiliser des couches de &#39;déconvolution&#39;
+            nb_open_err: int &gt; 0 nb de fois où pour une même image, le programme échoue à l&#39;ouvrir
+            verification_err: bool indique s&#39;il faut vérifier que toutes les images puissent être ouvertes
+        &#34;&#34;&#34;
+        # Spliting into train, validation, test
+        self.train_rate=train_rate
+        self.validation_rate=validation_rate
+        self.test_rate=test_rate
+        self.annexe_img = []
+        with open(localisation_annexe_txt,&#39;r&#39;) as f:
+                for l in f:
+                    self.annexe_img.append([&#34;/content/drive/My Drive/TIPE/&#34;+l.split(&#34;,&#34;)[0].strip(),&#34;/content/drive/My Drive/TIPE/&#34;+l.split(&#34;,&#34;)[1].strip()])#img noise, file
+        self.liste_files = [&#34;/content/drive/My Drive/TIPE/Galaxies_resized/&#34;+f for f in os.listdir(&#34;/content/drive/My Drive/TIPE/Galaxies_resized/&#34;)]+list(map(lambda x:x[1],self.annexe_img))
+        train,validation,test = self.index_split_into(len(self.liste_files))
+        self.train_dataset = [self.liste_files[i] for i in train]
+        self.type_train_dataset = [i-len(self.liste_files) if i &gt;= len(self.liste_files)-len(self.annexe_img) else &#39;orig&#39; for i in train]
+        self.validation_dataset = [self.liste_files[i] for i in validation]
+        self.type_validation_dataset = [i-len(self.liste_files) if i &gt;= len(self.liste_files)-len(self.annexe_img) else &#39;orig&#39; for i in validation]
+        self.test_dataset = [self.liste_files[i] for i in test]
+        self.type_test_dataset = [i-len(self.liste_files) if i &gt; len(self.liste_files)-len(self.annexe_img) else &#39;orig&#39; for i in test]
+
+        #buffer to save current batch type img (coming from previous training or artificially noised
+        self.type_img = [&#39;orig&#39; for i in range(batch_size)]
+        #Initialisasing batch count
+        if verification_err == True:
+            self.verification_dataset()
+        self.batch_size = batch_size
+        self.batch_nb_tr = 0
+        self.max_batch_nb_tr = int(len(self.train_dataset)/self.batch_size)
+        self.batch_nb_v = 0
+        self.max_batch_nb_v = int(len(self.validation_dataset)/self.batch_size)
+        self.batch_nb_tst = 0
+        self.max_batch_nb_tst = int(len(self.test_dataset)/self.batch_size)
+        #img parameters
+        self.taille_img = taille_img
+        self.nb_open_err = nb_open_err
+    def new_epoch(self):
+        self.batch_nb_tr = 0
+        self.batch_nb_v = 0
+        self.batch_nb_tst = 0
+    def index_split_into(self,longueur_data):
+        &#34;&#34;&#34;Retourne une liste contenant la liste des index des images d&#39;entrainement, celle de ceux de vérification et celel de ceux de test
+            #Arguments
+                    longueur_data, int &gt; 0 longueur de la liste des données
+        &#34;&#34;&#34;
+        indexes = np.arange(longueur_data)
+        np.random.shuffle(indexes)
+        L_int = [0]
+        for prct in [self.train_rate,self.validation_rate,self.test_rate]:
+            nvl_val = int(L_int[-1]+prct*longueur_data)
+            if nvl_val &lt; longueur_data:
+                L_int.append(nvl_val+1)
+            else:
+                L_int.append(longueur_data)
+        return [indexes[L_int[i-1]:L_int[i]+1] for i in range(1,len(L_int))]
+    def verification_dataset(self):
+        &#34;&#34;&#34;Vérifie si toutes les images du dataset peuvent être ouvertes&#34;&#34;&#34;
+        print(&#34;Vérification&#34;)
+        valide = True
+        result = None
+        for img in self.liste_files:
+            try:
+                result = cv2.imread(img)
+                if type(result)!=np.ndarray and result == None:
+                    valide = False
+                    raise Exception(&#34;Erreur image nulle : %s&#34;%(img))
+                del result
+            except Exception as e:
+                print(&#34;Can&#39;t open img %s&#34;%(img))
+                print(result)
+                print(&#34;Fin&#34;)
+                print(e)
+                valide = False
+        return valide
+    def normalisation(self,array):
+        assert type(array) == np.ndarray, &#34;Doit être une array et non %s&#34;%array
+        
+        return np.array((array-np.min(array))/(np.max(array)-np.min(array)),np.float32)
+    def next_batch_dataset(self,dataset):
+        &#34;&#34;&#34;Renvoi le dataset correspondant à l&#39;identificateur passé. Après avoir passé toutes les image : Renvoie None si le dataset d&#39;entrainement est fini, revient au début pour les autres datasets
+            #Arguments
+                    dataset: enum tr, v ou tst pour entrainement (train), validation et test choix du dataset
+        &#34;&#34;&#34;
+        assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+
+        data = None
+        if dataset == &#39;tr&#39;:
+            data = self.train_dataset,self.type_train_dataset
+            if self.batch_nb_tr &gt; self.max_batch_nb_tr or self.batch_nb_tr+1 &gt; self.max_batch_nb_tr:
+                return None # fin du lot d&#39;entrainement
+        elif dataset == &#39;v&#39;:
+            data = self.validation_dataset,self.type_validation_dataset
+            if self.batch_nb_v &gt; self.max_batch_nb_v or self.batch_nb_v+1 &gt; self.max_batch_nb_v:
+                self.batch_nb_v = 0# repart du début
+        elif dataset == &#39;tst&#39;:
+            data = self.test_dataset,self.type_test_dataset
+            if self.batch_nb_tst &gt; self.max_batch_nb_tst or self.batch_nb_tst+1 &gt; self.max_batch_nb_tst:
+                self.batch_nb_tst = 0# repart du début
+        return data
+    def open_img(self,path):
+        &#34;&#34;&#34;Ouvre l&#39;image au format float32 en acceptant self.nb_open_err erreurs
+            #Arguments
+                path: string, chemin de l image
+        &#34;&#34;&#34;
+        assert type(path) == str, &#34;Objet de type %s invalide&#34;%(type(path))
+
+        succes = False
+        compteur_erreurs = 0
+        img = None
+        while succes == False and compteur_erreurs &lt; self.nb_open_err:
+            try:
+                image = cv2.imread(path)
+                resized_image = cv2.resize(image,(self.taille_img,self.taille_img))
+                img = np.array(resized_image,dtype=np.float32)
+                succes = True
+            except Exception as e:
+                print(&#34;Error in next_batch&#34;)
+                compteur_erreurs += 1
+                if compteur_erreurs == self.nb_open_err:
+                    
+                    raise Exception(&#34;image %s raised error &#34;%img,e)
+        return img
+    def next_batch_original_img(self,dataset):
+        &#34;&#34;&#34;Renvoie le batch suivant dans le lot total d&#39;entrainement. Retourne None si il n&#39;y a plus de batch disponible et que tout le lot d&#39;entrainement a été passé
+            #Arguments
+                dataset, enum tr, v ou tst choix du dataset
+        &#34;&#34;&#34;
+        assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+        
+        dataset_type = self.next_batch_dataset(dataset)
+        if dataset_type == None:
+            return None,None
+        data,type_data = dataset_type
+        batch_nb = None
+        if dataset == &#39;tr&#39;:
+            batch_nb = self.batch_nb_tr
+            if (batch_nb+1)*self.batch_size &gt; len(data):
+                self.batch_nb_tr = 0
+        elif dataset == &#39;v&#39;:
+            batch_nb = self.batch_nb_v
+            if (batch_nb+1)*self.batch_size &gt; len(data):
+                self.batch_nb_v = 0
+        else:
+            batch_nb = self.batch_nb_tst
+            if (batch_nb+1)*self.batch_size &gt; len(data):
+                self.batch_nb_tst = 0
+
+        img_path = [img for img in data[batch_nb*self.batch_size:(batch_nb+1)*self.batch_size]]
+        type_img = [typ for typ in type_data[batch_nb*self.batch_size:(batch_nb+1)*self.batch_size]]
+
+        batch = []
+        batch_deja_bruit = []
+        for path,typ_index in zip(img_path,type_img):
+            batch.append(self.open_img(path))
+            if typ_index == &#39;orig&#39;:
+                batch_deja_bruit.append(None)
+            else:
+                batch_deja_bruit.append(self.normalisation(np.array(self.open_img(self.annexe_img[typ_index][0]))))
+        batch = self.normalisation(np.array(batch))
+        if dataset_type == &#39;tr&#39;:
+            self.batch_nb_tr += 1
+        elif dataset_type == &#39;v&#39;:
+            self.batch_nb_v += 1
+        else:
+            self.batch_nb_tst += 1
+        return batch,batch_deja_bruit
+    def next_batch_bruit_voile(self,voile_pow_neg_10_val1=0.4,voile_pow_neg_10_val2=1.3,μ_bruit=1.779,σ_bruit=1.779, typ=&#39;norm&#39;, dataset=&#39;tr&#39;):
+        &#34;&#34;&#34;Renvoie un tuple avec le batch (groupe) d&#39;images et son equivalent bruité artificellement avec les paramètres spécifiés
+            #Arguments
+                voile_pow_neg_10_val1,voile_pow_neg_10_val2 : définissent l&#39;intervalle [a,b] tel que le facteur sera entre 10**-b et 10**-a
+                bruit : gaussien des paramètres ci-dessus suivant N(10e-μ_bruit,10e-σ_bruit) 
+                typ : enum clip ou autre string (pour normaliser) indique si après éventuel bruitage on doit normaliser ou couper le batch au bon intervalle
+        &#34;&#34;&#34;
+        assert type(voile_pow_neg_10_val1) == float or type(voile_pow_neg_10_val1) == int, &#34;Veuillez entrer une valeur entière ou flotante pour l&#39;argument 1&#34;
+        assert type(voile_pow_neg_10_val1) == float or type(voile_pow_neg_10_val1) == int, &#34;Veuillez entrer une valeur entière ou flotante pour l&#39;argument 2&#34;
+        assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+        assert typ == &#39;norm&#39; or typ == &#39;clip&#39;, &#34;Méthode d&#39;ajustement à l&#39;intervalle inconnue : %s n&#39;est pas clip ou norm&#34;%(typ)
+        
+        batch_clean,batch_bruit = self.next_batch_original_img(dataset)
+        
+        if type(batch_clean) != np.ndarray:
+            print(&#34;End of epoch&#34;)
+            return None
+        batch_noise = np.copy(batch_clean)
+        #Calcul des facteurs de voile
+        random_in_interval = np.random.rand(self.batch_size,3)*abs(voile_pow_neg_10_val1-voile_pow_neg_10_val2) +min(voile_pow_neg_10_val1,voile_pow_neg_10_val2)
+        random_factor = 10**-(random_in_interval)
+        # Calcul du bruit
+        bruit = np.random.normal(μ_bruit,σ_bruit,size=(self.batch_size,self.taille_img,self.taille_img,3))
+        #Applique au batch
+        for img in range(self.batch_size):
+            if type(batch_bruit[img]) != np.ndarray:
+                for rgb_index in range(3):
+                    batch_noise[img,:,:,rgb_index] *= random_factor[img,rgb_index]
+                    batch_noise[img,:,:,rgb_index] += bruit[img,:,:,rgb_index]
+            else:
+                batch_noise[img,:,:,:] = batch_bruit[img]
+
+        #Choix de la méthode d&#39;ajustement à l&#39;intervalle
+        if typ == &#39;clip&#39;:
+            batch_noise = np.clip(batch_noise,0,1)
+        else:
+            batch_noise = self.normalisation(batch_noise)
+        
+        return batch_clean,batch_noise
+    def next_gan_batch(self,dataset):
+        &#34;&#34;&#34;Construction des batch d&#39;entrainement suivant le type de modèle\n
+        NB discriminateur : 1 annote une image bruitée\n
+        En phase d&#39;entrainement :\n
+        - entree generateur partiellement bruitee et sortie débruitee\n
+        - entree discriminateur partiellement bruitee et sortie telle que pour chaque img bruitee on ait un 1
+        - entree gan partiellement bruitee et sortie telle que pour chaque img on ait 0 (toutes les images débruitées)\n
+        En phase de validation ou test : Pour chaque ensemble (generateur, discriminateur, gan)\n
+        - Entree débruitée et sortie correspondante\n
+        - Entrée totalement bruitée et sortie correspondante\n
+            #Arguments
+                dataset: enum tr v ou tst pour entrainement, validation ou test
+        &#34;&#34;&#34;
+        assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+
+        data_batch = self.next_batch_bruit_voile(voile_pow_neg_10_val1=0.4, voile_pow_neg_10_val2=1.3, μ_bruit=1.779, σ_bruit=1.779, typ=&#39;norm&#39;, dataset=dataset)
+        if data_batch == None:
+            return None
+        batch_clean,batch_noise = data_batch
+        if dataset == &#39;tr&#39;:
+            #Generateur
+            gen_input = np.copy(batch_clean)
+            gen_output = batch_clean
+
+            random_index = np.arange(0,self.batch_size)
+            np.random.shuffle(random_index)
+            nb_changt = np.random.randint(0,self.batch_size)
+
+            random_index_to_chg = random_index[:nb_changt]
+            for index_chgt in random_index_to_chg:
+                gen_input[index_chgt,:,:,:] = batch_noise[index_chgt,:,:,:]
+            #Discriminateur
+            disc_input = gen_input
+            disc_output = np.zeros(self.batch_size)
+
+            for i in random_index_to_chg:
+                disc_output[i] = 1
+            #GAN
+            gan_input = gen_input
+            gan_output = np.zeros(self.batch_size)
+            return gen_input, gen_output,disc_input,disc_output,gan_input,gan_output
+        else:
+            #Generateur
+            gen_input_clean = batch_clean
+            gen_output_clean = batch_clean
+            gen_input_noise = batch_noise
+            gen_output_noise = batch_clean
+            #Discriminateur
+            disc_input_clean = batch_clean
+            disc_output_clean = np.zeros(self.batch_size)
+            disc_input_noise = batch_noise
+            disc_output_noise = np.ones(self.batch_size)
+            #GAN
+            gan_input_clean = batch_clean
+            gan_output_clean = np.zeros(self.batch_size)
+            gan_input_noise = batch_noise
+            gan_output_noise = np.ones(self.batch_size)
+            return gen_input_clean, gen_output_clean, gen_input_noise, gen_output_noise, disc_input_clean, disc_output_clean, disc_input_noise, disc_output_noise, gan_input_clean, gan_output_clean, gan_input_noise, gan_output_noise</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="input_setup.Dataset"><code class="flex name class">
+<span>class <span class="ident">Dataset</span></span>
+<span>(</span><span>localisation_annexe_txt, train_rate=0.7, validation_rate=0.2, test_rate=0.1, batch_size=10, taille_img=256, nb_open_err=10, verification_err=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Gère les 3 dataset de test, validation et entrainement</p>
+<h1 id="arguments">Arguments</h1>
+<pre><code>localisation_annexe_txt: string chemin relatif depuis le dossier TIPE
+train_rate: float entre 0 et 1 pourcentage des données consacrées à l'entrainement
+validation_rate: float entre 0 et 1 pourcentage des données consacrées à la validation
+test_rate: float entre 0 et 1 pourcentage des données consacrées aux tests
+batch_size: int &gt; 0 nombre d'image passées simultannément dans le réseau
+taille_img: int &gt; 0 fortement recommendé d'être une puissance de 2 pour ne pas avoir de problème si on a besoin d'utiliser des couches de 'déconvolution'
+nb_open_err: int &gt; 0 nb de fois où pour une même image, le programme échoue à l'ouvrir
+verification_err: bool indique s'il faut vérifier que toutes les images puissent être ouvertes
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Dataset:
+    &#34;&#34;&#34;Gère les 3 dataset de test, validation et entrainement&#34;&#34;&#34;
+    def __init__(self, localisation_annexe_txt,train_rate=0.7, validation_rate=0.2, test_rate=0.1, batch_size=10, taille_img=256, nb_open_err=10, verification_err=True):
+        &#34;&#34;&#34;
+        #Arguments
+            localisation_annexe_txt: string chemin relatif depuis le dossier TIPE
+            train_rate: float entre 0 et 1 pourcentage des données consacrées à l&#39;entrainement
+            validation_rate: float entre 0 et 1 pourcentage des données consacrées à la validation
+            test_rate: float entre 0 et 1 pourcentage des données consacrées aux tests
+            batch_size: int &gt; 0 nombre d&#39;image passées simultannément dans le réseau
+            taille_img: int &gt; 0 fortement recommendé d&#39;être une puissance de 2 pour ne pas avoir de problème si on a besoin d&#39;utiliser des couches de &#39;déconvolution&#39;
+            nb_open_err: int &gt; 0 nb de fois où pour une même image, le programme échoue à l&#39;ouvrir
+            verification_err: bool indique s&#39;il faut vérifier que toutes les images puissent être ouvertes
+        &#34;&#34;&#34;
+        # Spliting into train, validation, test
+        self.train_rate=train_rate
+        self.validation_rate=validation_rate
+        self.test_rate=test_rate
+        self.annexe_img = []
+        with open(localisation_annexe_txt,&#39;r&#39;) as f:
+                for l in f:
+                    self.annexe_img.append([&#34;/content/drive/My Drive/TIPE/&#34;+l.split(&#34;,&#34;)[0].strip(),&#34;/content/drive/My Drive/TIPE/&#34;+l.split(&#34;,&#34;)[1].strip()])#img noise, file
+        self.liste_files = [&#34;/content/drive/My Drive/TIPE/Galaxies_resized/&#34;+f for f in os.listdir(&#34;/content/drive/My Drive/TIPE/Galaxies_resized/&#34;)]+list(map(lambda x:x[1],self.annexe_img))
+        train,validation,test = self.index_split_into(len(self.liste_files))
+        self.train_dataset = [self.liste_files[i] for i in train]
+        self.type_train_dataset = [i-len(self.liste_files) if i &gt;= len(self.liste_files)-len(self.annexe_img) else &#39;orig&#39; for i in train]
+        self.validation_dataset = [self.liste_files[i] for i in validation]
+        self.type_validation_dataset = [i-len(self.liste_files) if i &gt;= len(self.liste_files)-len(self.annexe_img) else &#39;orig&#39; for i in validation]
+        self.test_dataset = [self.liste_files[i] for i in test]
+        self.type_test_dataset = [i-len(self.liste_files) if i &gt; len(self.liste_files)-len(self.annexe_img) else &#39;orig&#39; for i in test]
+
+        #buffer to save current batch type img (coming from previous training or artificially noised
+        self.type_img = [&#39;orig&#39; for i in range(batch_size)]
+        #Initialisasing batch count
+        if verification_err == True:
+            self.verification_dataset()
+        self.batch_size = batch_size
+        self.batch_nb_tr = 0
+        self.max_batch_nb_tr = int(len(self.train_dataset)/self.batch_size)
+        self.batch_nb_v = 0
+        self.max_batch_nb_v = int(len(self.validation_dataset)/self.batch_size)
+        self.batch_nb_tst = 0
+        self.max_batch_nb_tst = int(len(self.test_dataset)/self.batch_size)
+        #img parameters
+        self.taille_img = taille_img
+        self.nb_open_err = nb_open_err
+    def new_epoch(self):
+        self.batch_nb_tr = 0
+        self.batch_nb_v = 0
+        self.batch_nb_tst = 0
+    def index_split_into(self,longueur_data):
+        &#34;&#34;&#34;Retourne une liste contenant la liste des index des images d&#39;entrainement, celle de ceux de vérification et celel de ceux de test
+            #Arguments
+                    longueur_data, int &gt; 0 longueur de la liste des données
+        &#34;&#34;&#34;
+        indexes = np.arange(longueur_data)
+        np.random.shuffle(indexes)
+        L_int = [0]
+        for prct in [self.train_rate,self.validation_rate,self.test_rate]:
+            nvl_val = int(L_int[-1]+prct*longueur_data)
+            if nvl_val &lt; longueur_data:
+                L_int.append(nvl_val+1)
+            else:
+                L_int.append(longueur_data)
+        return [indexes[L_int[i-1]:L_int[i]+1] for i in range(1,len(L_int))]
+    def verification_dataset(self):
+        &#34;&#34;&#34;Vérifie si toutes les images du dataset peuvent être ouvertes&#34;&#34;&#34;
+        print(&#34;Vérification&#34;)
+        valide = True
+        result = None
+        for img in self.liste_files:
+            try:
+                result = cv2.imread(img)
+                if type(result)!=np.ndarray and result == None:
+                    valide = False
+                    raise Exception(&#34;Erreur image nulle : %s&#34;%(img))
+                del result
+            except Exception as e:
+                print(&#34;Can&#39;t open img %s&#34;%(img))
+                print(result)
+                print(&#34;Fin&#34;)
+                print(e)
+                valide = False
+        return valide
+    def normalisation(self,array):
+        assert type(array) == np.ndarray, &#34;Doit être une array et non %s&#34;%array
+        
+        return np.array((array-np.min(array))/(np.max(array)-np.min(array)),np.float32)
+    def next_batch_dataset(self,dataset):
+        &#34;&#34;&#34;Renvoi le dataset correspondant à l&#39;identificateur passé. Après avoir passé toutes les image : Renvoie None si le dataset d&#39;entrainement est fini, revient au début pour les autres datasets
+            #Arguments
+                    dataset: enum tr, v ou tst pour entrainement (train), validation et test choix du dataset
+        &#34;&#34;&#34;
+        assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+
+        data = None
+        if dataset == &#39;tr&#39;:
+            data = self.train_dataset,self.type_train_dataset
+            if self.batch_nb_tr &gt; self.max_batch_nb_tr or self.batch_nb_tr+1 &gt; self.max_batch_nb_tr:
+                return None # fin du lot d&#39;entrainement
+        elif dataset == &#39;v&#39;:
+            data = self.validation_dataset,self.type_validation_dataset
+            if self.batch_nb_v &gt; self.max_batch_nb_v or self.batch_nb_v+1 &gt; self.max_batch_nb_v:
+                self.batch_nb_v = 0# repart du début
+        elif dataset == &#39;tst&#39;:
+            data = self.test_dataset,self.type_test_dataset
+            if self.batch_nb_tst &gt; self.max_batch_nb_tst or self.batch_nb_tst+1 &gt; self.max_batch_nb_tst:
+                self.batch_nb_tst = 0# repart du début
+        return data
+    def open_img(self,path):
+        &#34;&#34;&#34;Ouvre l&#39;image au format float32 en acceptant self.nb_open_err erreurs
+            #Arguments
+                path: string, chemin de l image
+        &#34;&#34;&#34;
+        assert type(path) == str, &#34;Objet de type %s invalide&#34;%(type(path))
+
+        succes = False
+        compteur_erreurs = 0
+        img = None
+        while succes == False and compteur_erreurs &lt; self.nb_open_err:
+            try:
+                image = cv2.imread(path)
+                resized_image = cv2.resize(image,(self.taille_img,self.taille_img))
+                img = np.array(resized_image,dtype=np.float32)
+                succes = True
+            except Exception as e:
+                print(&#34;Error in next_batch&#34;)
+                compteur_erreurs += 1
+                if compteur_erreurs == self.nb_open_err:
+                    
+                    raise Exception(&#34;image %s raised error &#34;%img,e)
+        return img
+    def next_batch_original_img(self,dataset):
+        &#34;&#34;&#34;Renvoie le batch suivant dans le lot total d&#39;entrainement. Retourne None si il n&#39;y a plus de batch disponible et que tout le lot d&#39;entrainement a été passé
+            #Arguments
+                dataset, enum tr, v ou tst choix du dataset
+        &#34;&#34;&#34;
+        assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+        
+        dataset_type = self.next_batch_dataset(dataset)
+        if dataset_type == None:
+            return None,None
+        data,type_data = dataset_type
+        batch_nb = None
+        if dataset == &#39;tr&#39;:
+            batch_nb = self.batch_nb_tr
+            if (batch_nb+1)*self.batch_size &gt; len(data):
+                self.batch_nb_tr = 0
+        elif dataset == &#39;v&#39;:
+            batch_nb = self.batch_nb_v
+            if (batch_nb+1)*self.batch_size &gt; len(data):
+                self.batch_nb_v = 0
+        else:
+            batch_nb = self.batch_nb_tst
+            if (batch_nb+1)*self.batch_size &gt; len(data):
+                self.batch_nb_tst = 0
+
+        img_path = [img for img in data[batch_nb*self.batch_size:(batch_nb+1)*self.batch_size]]
+        type_img = [typ for typ in type_data[batch_nb*self.batch_size:(batch_nb+1)*self.batch_size]]
+
+        batch = []
+        batch_deja_bruit = []
+        for path,typ_index in zip(img_path,type_img):
+            batch.append(self.open_img(path))
+            if typ_index == &#39;orig&#39;:
+                batch_deja_bruit.append(None)
+            else:
+                batch_deja_bruit.append(self.normalisation(np.array(self.open_img(self.annexe_img[typ_index][0]))))
+        batch = self.normalisation(np.array(batch))
+        if dataset_type == &#39;tr&#39;:
+            self.batch_nb_tr += 1
+        elif dataset_type == &#39;v&#39;:
+            self.batch_nb_v += 1
+        else:
+            self.batch_nb_tst += 1
+        return batch,batch_deja_bruit
+    def next_batch_bruit_voile(self,voile_pow_neg_10_val1=0.4,voile_pow_neg_10_val2=1.3,μ_bruit=1.779,σ_bruit=1.779, typ=&#39;norm&#39;, dataset=&#39;tr&#39;):
+        &#34;&#34;&#34;Renvoie un tuple avec le batch (groupe) d&#39;images et son equivalent bruité artificellement avec les paramètres spécifiés
+            #Arguments
+                voile_pow_neg_10_val1,voile_pow_neg_10_val2 : définissent l&#39;intervalle [a,b] tel que le facteur sera entre 10**-b et 10**-a
+                bruit : gaussien des paramètres ci-dessus suivant N(10e-μ_bruit,10e-σ_bruit) 
+                typ : enum clip ou autre string (pour normaliser) indique si après éventuel bruitage on doit normaliser ou couper le batch au bon intervalle
+        &#34;&#34;&#34;
+        assert type(voile_pow_neg_10_val1) == float or type(voile_pow_neg_10_val1) == int, &#34;Veuillez entrer une valeur entière ou flotante pour l&#39;argument 1&#34;
+        assert type(voile_pow_neg_10_val1) == float or type(voile_pow_neg_10_val1) == int, &#34;Veuillez entrer une valeur entière ou flotante pour l&#39;argument 2&#34;
+        assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+        assert typ == &#39;norm&#39; or typ == &#39;clip&#39;, &#34;Méthode d&#39;ajustement à l&#39;intervalle inconnue : %s n&#39;est pas clip ou norm&#34;%(typ)
+        
+        batch_clean,batch_bruit = self.next_batch_original_img(dataset)
+        
+        if type(batch_clean) != np.ndarray:
+            print(&#34;End of epoch&#34;)
+            return None
+        batch_noise = np.copy(batch_clean)
+        #Calcul des facteurs de voile
+        random_in_interval = np.random.rand(self.batch_size,3)*abs(voile_pow_neg_10_val1-voile_pow_neg_10_val2) +min(voile_pow_neg_10_val1,voile_pow_neg_10_val2)
+        random_factor = 10**-(random_in_interval)
+        # Calcul du bruit
+        bruit = np.random.normal(μ_bruit,σ_bruit,size=(self.batch_size,self.taille_img,self.taille_img,3))
+        #Applique au batch
+        for img in range(self.batch_size):
+            if type(batch_bruit[img]) != np.ndarray:
+                for rgb_index in range(3):
+                    batch_noise[img,:,:,rgb_index] *= random_factor[img,rgb_index]
+                    batch_noise[img,:,:,rgb_index] += bruit[img,:,:,rgb_index]
+            else:
+                batch_noise[img,:,:,:] = batch_bruit[img]
+
+        #Choix de la méthode d&#39;ajustement à l&#39;intervalle
+        if typ == &#39;clip&#39;:
+            batch_noise = np.clip(batch_noise,0,1)
+        else:
+            batch_noise = self.normalisation(batch_noise)
+        
+        return batch_clean,batch_noise
+    def next_gan_batch(self,dataset):
+        &#34;&#34;&#34;Construction des batch d&#39;entrainement suivant le type de modèle\n
+        NB discriminateur : 1 annote une image bruitée\n
+        En phase d&#39;entrainement :\n
+        - entree generateur partiellement bruitee et sortie débruitee\n
+        - entree discriminateur partiellement bruitee et sortie telle que pour chaque img bruitee on ait un 1
+        - entree gan partiellement bruitee et sortie telle que pour chaque img on ait 0 (toutes les images débruitées)\n
+        En phase de validation ou test : Pour chaque ensemble (generateur, discriminateur, gan)\n
+        - Entree débruitée et sortie correspondante\n
+        - Entrée totalement bruitée et sortie correspondante\n
+            #Arguments
+                dataset: enum tr v ou tst pour entrainement, validation ou test
+        &#34;&#34;&#34;
+        assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+
+        data_batch = self.next_batch_bruit_voile(voile_pow_neg_10_val1=0.4, voile_pow_neg_10_val2=1.3, μ_bruit=1.779, σ_bruit=1.779, typ=&#39;norm&#39;, dataset=dataset)
+        if data_batch == None:
+            return None
+        batch_clean,batch_noise = data_batch
+        if dataset == &#39;tr&#39;:
+            #Generateur
+            gen_input = np.copy(batch_clean)
+            gen_output = batch_clean
+
+            random_index = np.arange(0,self.batch_size)
+            np.random.shuffle(random_index)
+            nb_changt = np.random.randint(0,self.batch_size)
+
+            random_index_to_chg = random_index[:nb_changt]
+            for index_chgt in random_index_to_chg:
+                gen_input[index_chgt,:,:,:] = batch_noise[index_chgt,:,:,:]
+            #Discriminateur
+            disc_input = gen_input
+            disc_output = np.zeros(self.batch_size)
+
+            for i in random_index_to_chg:
+                disc_output[i] = 1
+            #GAN
+            gan_input = gen_input
+            gan_output = np.zeros(self.batch_size)
+            return gen_input, gen_output,disc_input,disc_output,gan_input,gan_output
+        else:
+            #Generateur
+            gen_input_clean = batch_clean
+            gen_output_clean = batch_clean
+            gen_input_noise = batch_noise
+            gen_output_noise = batch_clean
+            #Discriminateur
+            disc_input_clean = batch_clean
+            disc_output_clean = np.zeros(self.batch_size)
+            disc_input_noise = batch_noise
+            disc_output_noise = np.ones(self.batch_size)
+            #GAN
+            gan_input_clean = batch_clean
+            gan_output_clean = np.zeros(self.batch_size)
+            gan_input_noise = batch_noise
+            gan_output_noise = np.ones(self.batch_size)
+            return gen_input_clean, gen_output_clean, gen_input_noise, gen_output_noise, disc_input_clean, disc_output_clean, disc_input_noise, disc_output_noise, gan_input_clean, gan_output_clean, gan_input_noise, gan_output_noise</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="input_setup.Dataset.index_split_into"><code class="name flex">
+<span>def <span class="ident">index_split_into</span></span>(<span>self, longueur_data)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Retourne une liste contenant la liste des index des images d'entrainement, celle de ceux de vérification et celel de ceux de test</p>
+<h1 id="arguments">Arguments</h1>
+<pre><code>    longueur_data, int &gt; 0 longueur de la liste des données
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def index_split_into(self,longueur_data):
+    &#34;&#34;&#34;Retourne une liste contenant la liste des index des images d&#39;entrainement, celle de ceux de vérification et celel de ceux de test
+        #Arguments
+                longueur_data, int &gt; 0 longueur de la liste des données
+    &#34;&#34;&#34;
+    indexes = np.arange(longueur_data)
+    np.random.shuffle(indexes)
+    L_int = [0]
+    for prct in [self.train_rate,self.validation_rate,self.test_rate]:
+        nvl_val = int(L_int[-1]+prct*longueur_data)
+        if nvl_val &lt; longueur_data:
+            L_int.append(nvl_val+1)
+        else:
+            L_int.append(longueur_data)
+    return [indexes[L_int[i-1]:L_int[i]+1] for i in range(1,len(L_int))]</code></pre>
+</details>
+</dd>
+<dt id="input_setup.Dataset.new_epoch"><code class="name flex">
+<span>def <span class="ident">new_epoch</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def new_epoch(self):
+    self.batch_nb_tr = 0
+    self.batch_nb_v = 0
+    self.batch_nb_tst = 0</code></pre>
+</details>
+</dd>
+<dt id="input_setup.Dataset.next_batch_bruit_voile"><code class="name flex">
+<span>def <span class="ident">next_batch_bruit_voile</span></span>(<span>self, voile_pow_neg_10_val1=0.4, voile_pow_neg_10_val2=1.3, μ_bruit=1.779, σ_bruit=1.779, typ='norm', dataset='tr')</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Renvoie un tuple avec le batch (groupe) d'images et son equivalent bruité artificellement avec les paramètres spécifiés</p>
+<h1 id="arguments">Arguments</h1>
+<pre><code>voile_pow_neg_10_val1,voile_pow_neg_10_val2 : définissent l'intervalle [a,b] tel que le facteur sera entre 10**-b et 10**-a
+bruit : gaussien des paramètres ci-dessus suivant N(10e-μ_bruit,10e-σ_bruit) 
+typ : enum clip ou autre string (pour normaliser) indique si après éventuel bruitage on doit normaliser ou couper le batch au bon intervalle
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def next_batch_bruit_voile(self,voile_pow_neg_10_val1=0.4,voile_pow_neg_10_val2=1.3,μ_bruit=1.779,σ_bruit=1.779, typ=&#39;norm&#39;, dataset=&#39;tr&#39;):
+    &#34;&#34;&#34;Renvoie un tuple avec le batch (groupe) d&#39;images et son equivalent bruité artificellement avec les paramètres spécifiés
+        #Arguments
+            voile_pow_neg_10_val1,voile_pow_neg_10_val2 : définissent l&#39;intervalle [a,b] tel que le facteur sera entre 10**-b et 10**-a
+            bruit : gaussien des paramètres ci-dessus suivant N(10e-μ_bruit,10e-σ_bruit) 
+            typ : enum clip ou autre string (pour normaliser) indique si après éventuel bruitage on doit normaliser ou couper le batch au bon intervalle
+    &#34;&#34;&#34;
+    assert type(voile_pow_neg_10_val1) == float or type(voile_pow_neg_10_val1) == int, &#34;Veuillez entrer une valeur entière ou flotante pour l&#39;argument 1&#34;
+    assert type(voile_pow_neg_10_val1) == float or type(voile_pow_neg_10_val1) == int, &#34;Veuillez entrer une valeur entière ou flotante pour l&#39;argument 2&#34;
+    assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+    assert typ == &#39;norm&#39; or typ == &#39;clip&#39;, &#34;Méthode d&#39;ajustement à l&#39;intervalle inconnue : %s n&#39;est pas clip ou norm&#34;%(typ)
+    
+    batch_clean,batch_bruit = self.next_batch_original_img(dataset)
+    
+    if type(batch_clean) != np.ndarray:
+        print(&#34;End of epoch&#34;)
+        return None
+    batch_noise = np.copy(batch_clean)
+    #Calcul des facteurs de voile
+    random_in_interval = np.random.rand(self.batch_size,3)*abs(voile_pow_neg_10_val1-voile_pow_neg_10_val2) +min(voile_pow_neg_10_val1,voile_pow_neg_10_val2)
+    random_factor = 10**-(random_in_interval)
+    # Calcul du bruit
+    bruit = np.random.normal(μ_bruit,σ_bruit,size=(self.batch_size,self.taille_img,self.taille_img,3))
+    #Applique au batch
+    for img in range(self.batch_size):
+        if type(batch_bruit[img]) != np.ndarray:
+            for rgb_index in range(3):
+                batch_noise[img,:,:,rgb_index] *= random_factor[img,rgb_index]
+                batch_noise[img,:,:,rgb_index] += bruit[img,:,:,rgb_index]
+        else:
+            batch_noise[img,:,:,:] = batch_bruit[img]
+
+    #Choix de la méthode d&#39;ajustement à l&#39;intervalle
+    if typ == &#39;clip&#39;:
+        batch_noise = np.clip(batch_noise,0,1)
+    else:
+        batch_noise = self.normalisation(batch_noise)
+    
+    return batch_clean,batch_noise</code></pre>
+</details>
+</dd>
+<dt id="input_setup.Dataset.next_batch_dataset"><code class="name flex">
+<span>def <span class="ident">next_batch_dataset</span></span>(<span>self, dataset)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Renvoi le dataset correspondant à l'identificateur passé. Après avoir passé toutes les image : Renvoie None si le dataset d'entrainement est fini, revient au début pour les autres datasets</p>
+<h1 id="arguments">Arguments</h1>
+<pre><code>    dataset: enum tr, v ou tst pour entrainement (train), validation et test choix du dataset
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def next_batch_dataset(self,dataset):
+    &#34;&#34;&#34;Renvoi le dataset correspondant à l&#39;identificateur passé. Après avoir passé toutes les image : Renvoie None si le dataset d&#39;entrainement est fini, revient au début pour les autres datasets
+        #Arguments
+                dataset: enum tr, v ou tst pour entrainement (train), validation et test choix du dataset
+    &#34;&#34;&#34;
+    assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+
+    data = None
+    if dataset == &#39;tr&#39;:
+        data = self.train_dataset,self.type_train_dataset
+        if self.batch_nb_tr &gt; self.max_batch_nb_tr or self.batch_nb_tr+1 &gt; self.max_batch_nb_tr:
+            return None # fin du lot d&#39;entrainement
+    elif dataset == &#39;v&#39;:
+        data = self.validation_dataset,self.type_validation_dataset
+        if self.batch_nb_v &gt; self.max_batch_nb_v or self.batch_nb_v+1 &gt; self.max_batch_nb_v:
+            self.batch_nb_v = 0# repart du début
+    elif dataset == &#39;tst&#39;:
+        data = self.test_dataset,self.type_test_dataset
+        if self.batch_nb_tst &gt; self.max_batch_nb_tst or self.batch_nb_tst+1 &gt; self.max_batch_nb_tst:
+            self.batch_nb_tst = 0# repart du début
+    return data</code></pre>
+</details>
+</dd>
+<dt id="input_setup.Dataset.next_batch_original_img"><code class="name flex">
+<span>def <span class="ident">next_batch_original_img</span></span>(<span>self, dataset)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Renvoie le batch suivant dans le lot total d'entrainement. Retourne None si il n'y a plus de batch disponible et que tout le lot d'entrainement a été passé</p>
+<h1 id="arguments">Arguments</h1>
+<pre><code>dataset, enum tr, v ou tst choix du dataset
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def next_batch_original_img(self,dataset):
+    &#34;&#34;&#34;Renvoie le batch suivant dans le lot total d&#39;entrainement. Retourne None si il n&#39;y a plus de batch disponible et que tout le lot d&#39;entrainement a été passé
+        #Arguments
+            dataset, enum tr, v ou tst choix du dataset
+    &#34;&#34;&#34;
+    assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+    
+    dataset_type = self.next_batch_dataset(dataset)
+    if dataset_type == None:
+        return None,None
+    data,type_data = dataset_type
+    batch_nb = None
+    if dataset == &#39;tr&#39;:
+        batch_nb = self.batch_nb_tr
+        if (batch_nb+1)*self.batch_size &gt; len(data):
+            self.batch_nb_tr = 0
+    elif dataset == &#39;v&#39;:
+        batch_nb = self.batch_nb_v
+        if (batch_nb+1)*self.batch_size &gt; len(data):
+            self.batch_nb_v = 0
+    else:
+        batch_nb = self.batch_nb_tst
+        if (batch_nb+1)*self.batch_size &gt; len(data):
+            self.batch_nb_tst = 0
+
+    img_path = [img for img in data[batch_nb*self.batch_size:(batch_nb+1)*self.batch_size]]
+    type_img = [typ for typ in type_data[batch_nb*self.batch_size:(batch_nb+1)*self.batch_size]]
+
+    batch = []
+    batch_deja_bruit = []
+    for path,typ_index in zip(img_path,type_img):
+        batch.append(self.open_img(path))
+        if typ_index == &#39;orig&#39;:
+            batch_deja_bruit.append(None)
+        else:
+            batch_deja_bruit.append(self.normalisation(np.array(self.open_img(self.annexe_img[typ_index][0]))))
+    batch = self.normalisation(np.array(batch))
+    if dataset_type == &#39;tr&#39;:
+        self.batch_nb_tr += 1
+    elif dataset_type == &#39;v&#39;:
+        self.batch_nb_v += 1
+    else:
+        self.batch_nb_tst += 1
+    return batch,batch_deja_bruit</code></pre>
+</details>
+</dd>
+<dt id="input_setup.Dataset.next_gan_batch"><code class="name flex">
+<span>def <span class="ident">next_gan_batch</span></span>(<span>self, dataset)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Construction des batch d'entrainement suivant le type de modèle</p>
+<p>NB discriminateur : 1 annote une image bruitée</p>
+<p>En phase d'entrainement :</p>
+<ul>
+<li>
+<p>entree generateur partiellement bruitee et sortie débruitee</p>
+</li>
+<li>
+<p>entree discriminateur partiellement bruitee et sortie telle que pour chaque img bruitee on ait un 1</p>
+</li>
+<li>entree gan partiellement bruitee et sortie telle que pour chaque img on ait 0 (toutes les images débruitées)</li>
+</ul>
+<p>En phase de validation ou test : Pour chaque ensemble (generateur, discriminateur, gan)</p>
+<ul>
+<li>
+<p>Entree débruitée et sortie correspondante</p>
+</li>
+<li>
+<p>Entrée totalement bruitée et sortie correspondante</p>
+<h1 id="arguments">Arguments</h1>
+<pre><code>dataset: enum tr v ou tst pour entrainement, validation ou test
+</code></pre>
+</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def next_gan_batch(self,dataset):
+    &#34;&#34;&#34;Construction des batch d&#39;entrainement suivant le type de modèle\n
+    NB discriminateur : 1 annote une image bruitée\n
+    En phase d&#39;entrainement :\n
+    - entree generateur partiellement bruitee et sortie débruitee\n
+    - entree discriminateur partiellement bruitee et sortie telle que pour chaque img bruitee on ait un 1
+    - entree gan partiellement bruitee et sortie telle que pour chaque img on ait 0 (toutes les images débruitées)\n
+    En phase de validation ou test : Pour chaque ensemble (generateur, discriminateur, gan)\n
+    - Entree débruitée et sortie correspondante\n
+    - Entrée totalement bruitée et sortie correspondante\n
+        #Arguments
+            dataset: enum tr v ou tst pour entrainement, validation ou test
+    &#34;&#34;&#34;
+    assert dataset == &#39;tr&#39; or dataset == &#39;v&#39; or dataset == &#39;tst&#39;, &#34;%s n&#39;est pas un des type tr, v ou tst autorisés&#34;%(dataset)
+
+    data_batch = self.next_batch_bruit_voile(voile_pow_neg_10_val1=0.4, voile_pow_neg_10_val2=1.3, μ_bruit=1.779, σ_bruit=1.779, typ=&#39;norm&#39;, dataset=dataset)
+    if data_batch == None:
+        return None
+    batch_clean,batch_noise = data_batch
+    if dataset == &#39;tr&#39;:
+        #Generateur
+        gen_input = np.copy(batch_clean)
+        gen_output = batch_clean
+
+        random_index = np.arange(0,self.batch_size)
+        np.random.shuffle(random_index)
+        nb_changt = np.random.randint(0,self.batch_size)
+
+        random_index_to_chg = random_index[:nb_changt]
+        for index_chgt in random_index_to_chg:
+            gen_input[index_chgt,:,:,:] = batch_noise[index_chgt,:,:,:]
+        #Discriminateur
+        disc_input = gen_input
+        disc_output = np.zeros(self.batch_size)
+
+        for i in random_index_to_chg:
+            disc_output[i] = 1
+        #GAN
+        gan_input = gen_input
+        gan_output = np.zeros(self.batch_size)
+        return gen_input, gen_output,disc_input,disc_output,gan_input,gan_output
+    else:
+        #Generateur
+        gen_input_clean = batch_clean
+        gen_output_clean = batch_clean
+        gen_input_noise = batch_noise
+        gen_output_noise = batch_clean
+        #Discriminateur
+        disc_input_clean = batch_clean
+        disc_output_clean = np.zeros(self.batch_size)
+        disc_input_noise = batch_noise
+        disc_output_noise = np.ones(self.batch_size)
+        #GAN
+        gan_input_clean = batch_clean
+        gan_output_clean = np.zeros(self.batch_size)
+        gan_input_noise = batch_noise
+        gan_output_noise = np.ones(self.batch_size)
+        return gen_input_clean, gen_output_clean, gen_input_noise, gen_output_noise, disc_input_clean, disc_output_clean, disc_input_noise, disc_output_noise, gan_input_clean, gan_output_clean, gan_input_noise, gan_output_noise</code></pre>
+</details>
+</dd>
+<dt id="input_setup.Dataset.normalisation"><code class="name flex">
+<span>def <span class="ident">normalisation</span></span>(<span>self, array)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalisation(self,array):
+    assert type(array) == np.ndarray, &#34;Doit être une array et non %s&#34;%array
+    
+    return np.array((array-np.min(array))/(np.max(array)-np.min(array)),np.float32)</code></pre>
+</details>
+</dd>
+<dt id="input_setup.Dataset.open_img"><code class="name flex">
+<span>def <span class="ident">open_img</span></span>(<span>self, path)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Ouvre l'image au format float32 en acceptant self.nb_open_err erreurs</p>
+<h1 id="arguments">Arguments</h1>
+<pre><code>path: string, chemin de l image
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def open_img(self,path):
+    &#34;&#34;&#34;Ouvre l&#39;image au format float32 en acceptant self.nb_open_err erreurs
+        #Arguments
+            path: string, chemin de l image
+    &#34;&#34;&#34;
+    assert type(path) == str, &#34;Objet de type %s invalide&#34;%(type(path))
+
+    succes = False
+    compteur_erreurs = 0
+    img = None
+    while succes == False and compteur_erreurs &lt; self.nb_open_err:
+        try:
+            image = cv2.imread(path)
+            resized_image = cv2.resize(image,(self.taille_img,self.taille_img))
+            img = np.array(resized_image,dtype=np.float32)
+            succes = True
+        except Exception as e:
+            print(&#34;Error in next_batch&#34;)
+            compteur_erreurs += 1
+            if compteur_erreurs == self.nb_open_err:
+                
+                raise Exception(&#34;image %s raised error &#34;%img,e)
+    return img</code></pre>
+</details>
+</dd>
+<dt id="input_setup.Dataset.verification_dataset"><code class="name flex">
+<span>def <span class="ident">verification_dataset</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Vérifie si toutes les images du dataset peuvent être ouvertes</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def verification_dataset(self):
+    &#34;&#34;&#34;Vérifie si toutes les images du dataset peuvent être ouvertes&#34;&#34;&#34;
+    print(&#34;Vérification&#34;)
+    valide = True
+    result = None
+    for img in self.liste_files:
+        try:
+            result = cv2.imread(img)
+            if type(result)!=np.ndarray and result == None:
+                valide = False
+                raise Exception(&#34;Erreur image nulle : %s&#34;%(img))
+            del result
+        except Exception as e:
+            print(&#34;Can&#39;t open img %s&#34;%(img))
+            print(result)
+            print(&#34;Fin&#34;)
+            print(e)
+            valide = False
+    return valide</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="input_setup.Dataset" href="#input_setup.Dataset">Dataset</a></code></h4>
+<ul class="">
+<li><code><a title="input_setup.Dataset.index_split_into" href="#input_setup.Dataset.index_split_into">index_split_into</a></code></li>
+<li><code><a title="input_setup.Dataset.new_epoch" href="#input_setup.Dataset.new_epoch">new_epoch</a></code></li>
+<li><code><a title="input_setup.Dataset.next_batch_bruit_voile" href="#input_setup.Dataset.next_batch_bruit_voile">next_batch_bruit_voile</a></code></li>
+<li><code><a title="input_setup.Dataset.next_batch_dataset" href="#input_setup.Dataset.next_batch_dataset">next_batch_dataset</a></code></li>
+<li><code><a title="input_setup.Dataset.next_batch_original_img" href="#input_setup.Dataset.next_batch_original_img">next_batch_original_img</a></code></li>
+<li><code><a title="input_setup.Dataset.next_gan_batch" href="#input_setup.Dataset.next_gan_batch">next_gan_batch</a></code></li>
+<li><code><a title="input_setup.Dataset.normalisation" href="#input_setup.Dataset.normalisation">normalisation</a></code></li>
+<li><code><a title="input_setup.Dataset.open_img" href="#input_setup.Dataset.open_img">open_img</a></code></li>
+<li><code><a title="input_setup.Dataset.verification_dataset" href="#input_setup.Dataset.verification_dataset">verification_dataset</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

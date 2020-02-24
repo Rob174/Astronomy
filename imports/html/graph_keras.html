@@ -1,0 +1,1701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.4" />
+<title>graph_keras API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>graph_keras</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from tensorflow.keras import backend as K
+
+from tensorflow.keras.layers import Input
+from tensorflow.keras.layers import Dense,Convolution2D,Activation,Conv2DTranspose
+from tensorflow.keras.layers import MaxPooling2D,AveragePooling2D
+from tensorflow.keras.layers import Dropout,BatchNormalization
+from tensorflow.keras.layers import Concatenate,Subtract,Add
+from tensorflow.keras.layers import Flatten, Reshape
+from custom_layers import * 
+from graphviz import render
+from graphviz import Digraph,Graph
+import numpy as np
+class G_Graph:
+    &#34;&#34;&#34;
+    Couche ajoutant les fonctionnalités&lt;br/&gt;
+    - Création d&#39;un graph Graphviz&lt;br/&gt;
+    - Utilisation de sous-cluster pour séparer des sous-ensemble comme le générateur du discriminateur&lt;br/&gt;
+    #Arguments
+    - &lt;i&gt;list_nodes&lt;/i&gt;: cf attribut node 
+    - &lt;i&gt;list_names&lt;/i&gt;: cf attribut names
+    #Attributs
+    - &lt;i&gt;index_couche&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, index de la couche courante
+    - &lt;i&gt;index_graph&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, index du graph courant
+    - &lt;i&gt;graph&lt;/i&gt;: &lt;b&gt;Digraph&lt;/b&gt;, graph parent
+    - &lt;i&gt;nodes&lt;/i&gt;: &lt;b&gt;list de G_Layer&lt;/b&gt;, couches du modèle &lt;b&gt;entrées dans l&#39;ordre de définition&lt;/b&gt;
+    - &lt;i&gt;names&lt;/i&gt;: &lt;b&gt;list de string&lt;/b&gt;, noms des couches &lt;b&gt;entrés dans le même ordre que pour nodes&lt;/b&gt; sous la forme (indiqué sous forme regex) [+*]?nom1_color1  [+*]?nom2_color2 [+*]?nom3_color3 du plus large graph au plus petit 
+    - &lt;i&gt;graph_list&lt;/i&gt;: &lt;b&gt;list de Digraph&lt;/b&gt;, liste des graphs successivement créés
+    - &lt;i&gt;graph_names_list&lt;/i&gt;: &lt;b&gt;list de string&lt;/b&gt;, liste des noms de ces graph
+    &#34;&#34;&#34;
+    def __init__(self,list_nodes,list_names):
+        assert type(list_nodes)==list , &#39;Veuillez entrer une liste et non %s&#39;%(list_nodes)
+        assert type(list_names)==list , &#39;Veuillez entrer une liste et non %s&#39;%(list_names)
+        
+        self.index_couche = 0
+        self.index_graph = 0
+        self.graph = self.new_graph(&#34;transparent&#34;,&#34;LR&#34;,&#34;&#34;)
+        self.nodes = list_nodes
+        self.names = list_names
+        self.graph_list = [self.graph]
+        self.graph_names_list = []
+        
+    def build_graph_clusters(self):
+        &#34;&#34;&#34;Exploite les nom des couches pour construire les clusters indiqués (cf attribut names)&#34;&#34;&#34;
+        _,_,_,tmp_names = self.graph_list[:],self.graph_names_list[:],self.nodes[:],self.names[:]
+        for name_node in tmp_names:
+            if name_node != &#34;&#34;:#Si on a un sous-cluster
+                clusters = name_node.split(&#34; &#34;)#On choisit espace comme séparateur de sous-clusters ; + comme début de sous-cluster * comme fin (à placer au début du sous-cluster)
+                
+                for i,clust_name_bg in enumerate(clusters):
+                    clust_name = clust_name_bg.split(&#34;_&#34;)[0]
+                    clust_bg = clust_name_bg.split(&#34;_&#34;)[1]
+                    if clust_name[0] == &#34;+&#34;:
+                        self.new_graph(clust_bg,&#34;LR&#34;,clust_name)#Création d&#39;un sous-graph
+                    elif clust_name[0] == &#34;*&#34;:
+                        index_graph = self.graph_names_list.index(clust_name[1:])
+                        index_graph_prec = self.graph_names_list.index(clusters[i-1])
+                        self.graph_list[index_graph_prec].subgraph(self.graph_list[index_graph])#Ajout du cluster au graph plus élevé
+                        
+    def new_graph(self,bg_clr,dir,name):
+        &#34;&#34;&#34;Crée un nouveau cluster avec les paramètres et l ajoute à graph_list et graph_names_list
+        #Arguments
+        - &lt;i&gt;bg_clr&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, couleur de fond du cluster
+        - &lt;i&gt;dir&lt;/i&gt;: &lt;b&gt;enum string&lt;/b&gt;, LR ou TB direction du graph
+        - &lt;i&gt;name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom du graph 
+        &#34;&#34;&#34;
+        graph = Digraph(name=&#34;cluster_Graph%d&#34;%(self.index_graph),format=&#39;png&#39;)
+        graph.attr(style=&#39;filled&#39;,label=name)
+        graph.attr(bgcolor=bg_clr)
+        graph.attr(rankdir=dir)
+        self.graph_list.append(graph)
+        self.graph_names_list.append(name)
+        self.index_graph += 1
+        return graph
+    def render_graph(self,name):
+        &#34;&#34;&#34;Fait le rendu du graph avec le nom de graph indiqué&#34;&#34;&#34;
+        assert type(name)==str , &#39;Veuillez entrer une chaine de caractères et non %s&#39;%(name)
+        self.graph.render(name)
+class G_Layer:
+    &#34;&#34;&#34;Représente un layer quelconque
+        #Arguments
+        - &lt;i&gt;dico_param&lt;/i&gt;: &lt;b&gt;dictionnaire&lt;/b&gt;, dépend du layer
+        - &lt;i&gt;index&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, index du précédent layer
+        - &lt;i&gt;cluster_name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom du cluster
+        - &lt;i&gt;cluster_bg&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, couleur du cluster graphviz (cf doc graphviz pour valeurs autorisées)
+        - &lt;i&gt;draw&lt;/i&gt;: &lt;b&gt;bool&lt;/b&gt;, Indique si le layer doit être dessiné par graphviz
+        #Attributs
+        - &lt;i&gt;index&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, index de la couche courante
+        - &lt;i&gt;draw&lt;/i&gt;: &lt;b&gt;bool&lt;/b&gt;, Indique si le layer doit être dessiné par graphviz
+        - &lt;i&gt;layer&lt;/i&gt;: &lt;b&gt;layer Keras&lt;/b&gt;, à évaluer pour avoir la sortie
+        - &lt;i&gt;param&lt;/i&gt;: &lt;b&gt;dictionnaire&lt;/b&gt;, paramètres passés en argument, dépendent de la couche, vérifiés par verif_param
+        - &lt;i&gt;output&lt;/i&gt;: &lt;b&gt;None ou sortie de couche Keras&lt;/b&gt;, None = non évalué ; après appel de &lt;b&gt;eval&lt;/b&gt; contient la sortie de la couche évaluée
+        - &lt;i&gt;name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom du layer keras ; défini après appel de &lt;b&gt;build_layer&lt;/b&gt;
+        - &lt;i&gt;input&lt;/i&gt;: &lt;b&gt;G_Layer&lt;/b&gt;, entrée du modèle
+        - &lt;i&gt;output_shape&lt;/i&gt;: &lt;b&gt;tuple&lt;/b&gt;, forme de sortie calculée théoriquement
+        - &lt;i&gt;label&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, texte affiché par graphviz pour la couche
+        - &lt;i&gt;graph&lt;/i&gt;: &lt;b&gt;Digraph&lt;/b&gt;, graph dans lequel est compris la couche
+    &#34;&#34;&#34;
+    def __init__(self,dico_param,index,cluster_name, cluster_bg,draw=True):
+        
+        assert type(index) == str,&#34;Veuillez entrer un entier comme index de la couche et non %s&#34;%(index)
+        self.index = index+1
+        self.draw = draw
+        self.layer = None
+        self.param = dico_param
+        self.output = None
+        self.name = None
+        self.input = None
+        self.input_shape = None
+        self.output_shape = None
+        #Graphviz parameter
+        self.label = &#34;&#34;
+        self.graph = None
+        return self
+    def set_input(self,input):
+        &#34;&#34;&#34;Specifie l entree de la couche, sa forme. Verifie que les arguments sont bien ceux attendus : &lt;b&gt;Fonction à appeler après build_layer et donc build_and_graph&lt;/b&gt;
+        #Arguments
+        - &lt;i&gt;input_dic&lt;/i&gt;: &lt;b&gt;G_Layer&lt;/b&gt;, entree
+        &#34;&#34;&#34;
+        self.input = input
+        self.input_shape = input.output_shape
+        self.output_shape = self.input_shape
+        self.verif_param()
+        return self
+    def set_graph(self,graph):
+        &#34;&#34;&#34;Specifie le graph de la couche : &lt;b&gt;Fonction à appeler avant build_and_graph&lt;/b&gt;
+        #Arguments
+        - &lt;i&gt;graph&lt;/i&gt;: &lt;b&gt;Digraph&lt;/b&gt;, graph de la couche
+        &#34;&#34;&#34;
+        self.graph = graph
+
+    def build_and_graph(self):
+        &#34;&#34;&#34;Fait le lien sur le graph entre la couche précédante et la couche courante si la couche doit être dessinée&#34;&#34;&#34;
+        if self.draw == True:
+            self.build_layer()
+            #Graphviz links
+            if type(self.input)==list:#Pour les layers Concatenate, Add, Subtract
+                for layer in self.input:#Permet d&#39;avoir un nb qlconque de layers en entrée notamment pour le Concatenate
+                    self.graph.edge(layer.index,self.index)
+            else:
+                self.graph.edge(self.input.index,self.index)
+    def build_layer(self):
+        &#34;&#34;&#34;Construit la couche : Surchargée par les fils&#34;&#34;&#34;
+        print(&#34;Erreur de définition de build_layer pour l&#39;index %d&#34;%(self.index))
+        pass
+    def verif_param(self):
+        &#34;&#34;&#34;Verifie que les arguments sont bien ceux attendus : Surchargée par les fils&#34;&#34;&#34;
+        print(&#34;Erreur de définition de verif_param pour l&#39;index %d&#34;%(self.index))
+        pass
+    def identifie(self):
+        &#34;&#34;&#34;Affiche le nom de la couche ou un message d&#39;erreur&#34;&#34;&#34;
+        if type(self.name) == str:
+            print(&#34;Je suis &#34;,self.name)
+        elif type(self.name) == list:
+            print(&#34;Je suis &#34;,self.name[0],&#34; et &#34;,self.name[1])
+        else:
+            print(&#34;Je suis quelque chose .... d&#39;inconnu : &#34;,self.name)
+    def trainable(self,is_trainable):
+        &#34;&#34;&#34;Indique si la couche est entrainable ou non &lt;b&gt;is_trainable&lt;/b&gt; booleen&#34;&#34;&#34;
+        if type(self.layer) == list:
+            for l in self.layer:
+                l.trainable = False
+        else:
+            l.trainable = False
+    def eval(self):
+        &#34;&#34;&#34;Utilise l input pour evaluer la sortie de la couche. (Fonctionnalité en + voir le code)&#34;&#34;&#34;
+        sortie = self.input.layer
+        if type(self.layer) == list:
+            for l in self.layer:
+                sortie = l(sortie)
+            self.output = sortie
+        else:
+            self.output = l(sortie)
+        return self.output
+
+#Improvements at the upper level
+class G_Input(G_Layer):
+    &#34;&#34;&#34;Construit une entree du reseau
+    #Arguments
+    - &lt;i&gt;name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom
+    &#34;&#34;&#34;
+    def verif_param(self):
+        assert type(self.param[&#34;name&#34;])==str , &#39;Veuillez entrer une chaine de caractere et non %s&#39;%(self.param[&#34;name&#34;])
+    def build_layer(self):
+        self.name = &#34;%d_%s&#34;%(self.index,self.param[&#34;name&#34;])
+        self.layer = Input(shape=self.input_shape, name=self.name)
+        self.label = &#39;{Input\n%s|{Shape | %s}}&#39;%(self.param[&#34;name&#34;],self.input_shape)
+        self.graph.node(self.index,self.label)
+class G_Convolution(G_Layer):
+    &#34;&#34;&#34;
+    #Arguments
+    - &lt;i&gt;k&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, &gt; 0 noyau
+    - &lt;i&gt;f&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, &gt; 0 nb de filtres
+    - &lt;i&gt;s&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, &gt; 0 pas
+    #Illustration
+    Avec strides à 1 et le padding SAME choisi ici :
+    ![](https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/full_padding_no_strides.gif)
+    Source : [vdumoulin github](https://github.com/vdumoulin/conv_arithmetic)
+    Avec strides différent de 1 en descendant
+    ![](https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/padding_strides_odd.gif)
+    Source : [vdumoulin github](https://github.com/vdumoulin/conv_arithmetic)
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = [   &#34;%d_conv_k%d_1_f%d&#34;%(self.index,self.param[&#34;k&#34;],self.param[&#34;f&#34;]),
+                        &#34;%d_conv_k1_%d_f%d&#34;%(self.index,self.param[&#34;k&#34;],self.param[&#34;f&#34;])]
+        couche1 = Convolution2D(filters=self.param[&#34;f&#34;],
+                                kernel_size=(self.param[&#34;k&#34;],1),
+                                activation=None,
+                                strides=(self.param[&#34;s&#34;],1),
+                                padding=&#39;SAME&#39;,
+                                name=self.name[0],
+                                trainable=True)
+        couche2 = Convolution2D(filters=self.param[&#34;f&#34;],
+                                kernel_size=(1,self.param[&#34;k&#34;]),
+                                activation=None,
+                                strides=(1,self.param[&#34;s&#34;]),
+                                padding=&#39;SAME&#39;,
+                                name=self.name[1],
+                                trainable=True)
+        self.layer = [couche1,couche2]
+        self.label = &#39;{Convolution %s | {Shape | %s} | {Noyau | %d} | {Filtres | %d} | {Strides | %d}}&#39;%(self.index, self.input_shape,self.param[&#34;k&#34;],self.param[&#34;f&#34;],self.param[&#34;s&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;k&#34;])==int , &#39;Veuillez entrer entier et non %s&#39;%(self.param[&#34;k&#34;])
+        assert type(self.param[&#34;f&#34;])==int , &#39;Veuillez entrer entier et non %s&#39;%(self.param[&#34;f&#34;])
+class G_Dropout(G_Layer):
+    &#34;&#34;&#34;
+    #Arguments
+    - &lt;i&gt;r&lt;/i&gt;: &lt;b&gt;float&lt;/b&gt;, 0 &lt; r &lt; 1 ou Input
+    &#34;&#34;&#34;
+    def build_layer(self):
+        if type(self.param[&#39;rate&#39;]) != float:
+            self.rate = K.cast(self.param[&#39;rate&#39;][0,0],K.floatx())
+            self.name = &#39;%d_dropout_r_adaptative&#39;%(self.index)
+            self.label = &#39;{Dropout %d | {Rate | Adapté}}&#39;%(self.index)
+        else:
+            self.rate = self.param[&#39;rate&#39;]
+            self.name = &#39;%d_dropout_r%.2f&#39;%(self.index,self.rate)
+            self.label = &#39;{Dropout %d | {Rate | %f}}&#39;%(self.index,self.rate)
+        self.layer = Dropout(name=self.name,rate=self.rate,trainable=True)
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        print(&#34;ATTENTION : parametre non vérifié : le type du taux de dropout est il correct ? %s&#34;%(self.param[&#34;rate&#34;]))
+class G_Lrn(G_Layer):
+    &#34;&#34;&#34;![](https://miro.medium.com/max/1918/1*MFl0tPjwvc49HirAJZPhEA.png)
+    #Arguments
+    - &lt;i&gt;n&lt;/i&gt;: &lt;b&gt;int &gt;0&lt;/b&gt;, neighborhood length i.e. how many consecutive pixel values need to be considered while carrying out the normalization
+    - &lt;i&gt;k&lt;/i&gt;: &lt;b&gt;float&lt;/b&gt;, offset (usually positive to avoid dividing by 0).
+    - &lt;i&gt;a&lt;/i&gt;: &lt;b&gt;float&lt;/b&gt;, scale factor, usually positive
+    - &lt;i&gt;b&lt;/i&gt;: &lt;b&gt;float&lt;/b&gt;, exponent
+    #Reference
+    [Difference between Local Response Normalization and Batch Normalization](https://towardsdatascience.com/difference-between-local-response-normalization-and-batch-normalization-272308c034ac)
+
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_lrn_n%d_k%d_a%.2e_b%.2f&#39;%(self.index,self.param[&#34;n&#34;],self.param[&#34;k&#34;],self.param[&#34;a&#34;],self.param[&#34;b&#34;])
+        self.layer = LRN2D(n=self.param[&#34;n&#34;],k=self.param[&#34;k&#34;],alpha=self.param[&#34;a&#34;],beta=self.param[&#34;b&#34;],name=self.name)
+        self.label = &#39;{Regularisation\nRéponse\nLocale\n%s | {Noyau | %d} | {k | %.2f} | {alpha | %.2e} | {beta | %.2e}}&#39;%(self.index,self.param[&#34;n&#34;],self.param[&#34;k&#34;],self.param[&#34;a&#34;],self.param[&#34;b&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;n&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;n&#34;])
+        assert type(self.param[&#34;k&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;k&#34;])
+        assert type(self.param[&#34;a&#34;])==float , &#39;Veuillez entrer un flotant et non %s&#39;%(self.param[&#34;a&#34;])
+        assert type(self.param[&#34;b&#34;])==float , &#39;Veuillez entrer un flotant et non %s&#39;%(self.param[&#34;b&#34;])
+class G_Activation(G_Layer):
+    &#34;&#34;&#34;Applique la fonction d&#39;activation SELU&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_activation_SELU&#39;%(self.index)
+        self.layer = Activation(SELU,name=self.name)
+        self.label = &#39;{Activation %d | {Type | SELU}}&#39;%(self.index)
+        self.graph.node(self.index,self.label)
+class G_BatchNorm(G_Layer):
+    &#34;&#34;&#34;Normalisation par batch&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_batchnorm&#39;%(self.index)
+        self.layer = BatchNormalization(name=self.name,trainable=True)
+        self.label = &#39;{Normalisation\npar\nBatch\n%d}&#39;%(self.index)
+        self.graph.node(self.index,self.label)
+class G_Dense(G_Layer):
+    &#34;&#34;&#34;Couche totalement connectée
+    #Arguments
+    - &lt;i&gt;f&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, nombre de filtres
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_dense_f%d&#39;%(self.index,self.param[&#34;f&#34;])
+        self.layer = Dense(self.param[&#34;f&#34;],activation=None,name=self.name,trainable=True)
+        self.label = &#39;{Dense %d | {Shape | %s} | {Filtres | %d}}&#39;%(self.index,self.input_shape,self.param[&#34;f&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;f&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;f&#34;])
+class G_Pool(G_Layer):
+    &#34;&#34;&#34;Couche de max-pooling uniquement pour le moment. Par défaut le pas (strides) est de deux avec keras.
+    #Arguments
+    - &lt;i&gt;f&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, nombre de filtres
+    - &lt;i&gt;k&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, noyau
+    #Illustration
+    En appliquant soit le max soit la moyenne
+    ![](https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/no_padding_no_strides.gif)
+    Source : [vdumoulin github](https://github.com/vdumoulin/conv_arithmetic)
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_max_p_k%d&#39;%(self.index,self.param[&#34;k&#34;])
+        self.layer = MaxPooling2D(name=self.name,pool_size=self.param[&#34;k&#34;],padding=&#39;VALID&#39;,trainable=True)
+        self.output_shape = (self.input_shape[0],(self.param[&#34;k&#34;] - self.input_shape[-1]) + 1,(self.param[&#34;k&#34;] - self.input_shape[-1]) + 1,self.input_shape[-1])
+        self.label = &#39;{MaxPooling %d | { Input Shape | %s} | {Output Shape | %s} | {Noyau | %d}}&#39;%(self.index,self.input_shape,self.output_shape,self.param[&#34;k&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;k&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;k&#34;])
+class G_Deconv(G_Layer):
+    &#34;&#34;&#34;Couche inverse de la couche de convolution
+    #Arguments
+    - &lt;i&gt;k&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, noyau
+    - &lt;i&gt;f&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, nombre de filtres
+    - &lt;i&gt;strides&lt;/i&gt;: &lt;b&gt;int &gt; 0 en général &gt; 1&lt;/b&gt;, pas
+    #Illustration
+    ![](https://raw.githubusercontent.com/vdumoulin/conv_arithmetic/master/gif/padding_strides_transposed.gif)
+    Source : [vdumoulin github](https://github.com/vdumoulin/conv_arithmetic)
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_deconv_k%d_f%d&#39;%(self.index,self.param[&#34;k&#34;],self.param[&#34;f&#34;])
+        self.layer = Conv2DTranspose(filters=self.param[&#34;f&#34;],kernel_size=self.param[&#34;k&#34;], strides=self.param[&#34;strides&#34;],name=self.name,padding=&#39;VALID&#39;,trainable=True)
+        self.output_shape = (self.input_shape[0], (self.input_shape[1]-1)*self.param[&#34;strides&#34;]+self.param[&#34;k&#34;], (self.input_shape[1]-1)*self.param[&#34;strides&#34;]+self.param[&#34;k&#34;],self.input_shape[-1])
+        self.label = &#39;{Deconvolution %d | {Input Shape | %s} | {Output Shape | %s} | {Noyau | %d} | {Filtres | %d} | {Strides | %s}}&#39;%(self.index, self.input_shape, self.output_shape, self.param[&#34;k&#34;], self.param[&#34;f&#34;], self.param[&#34;strides&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;k&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;k&#34;])
+        assert type(self.param[&#34;f&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;f&#34;])
+        assert type(self.param[&#34;strides&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;strides&#34;])
+class G_Flat(G_Layer):
+    &#34;&#34;&#34;Mise en vecteur&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_flatten&#39;%(self.index)
+        self.layer = Flatten(name=self.name)
+        self.output_shape = (self.input_shape[0],np.prod(self.input_shape[1:]))
+        self.label = &#39;{Flatten %d | {Input Shape | %s} | {Output Shape | %s}}&#39;%(self.index,self.input_shape,self.output_shape)
+        self.graph.node(self.index,self.label)
+class G_Proba(G_Layer):
+    &#34;&#34;&#34;Application de a fonction sigmoide interprétée comme probabilité&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_sigmoid_proba&#39;%(self.index)
+        self.layer = Activation(&#39;sigmoid&#39;,name=self.name)
+        self.label = &#39;{Sigmoïde %d}&#39;%(self.index)
+        self.graph.node(self.index,self.label)
+
+class G_Add(G_Layer):
+    &#34;&#34;&#34;Ajoute le résultat de plusieurs couches&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_add&#39;%(self.index)
+        self.layer = Add(name=self.name)
+        self.label = &#39;{Addition %d | {Shape | %s} | {Couche %d - Couche %d}}&#39;%(self.index,self.input_shape[0],self.input[0].index,self.input[1].index)
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.input)==list , &#39;Veuillez entrer une liste et non %s&#39;%(self.param[&#34;input&#34;])
+        assert False not in list(map(lambda x:x.output_shape==self.input[0].output_shape,self.input)) , &#39;2 layers du Add %d ne sont pas de même dimension %s&#39;%(self.index,list(map(lambda x:x.output_shape,self.input)))
+class G_Subtract(G_Layer):
+    &#34;&#34;&#34;Soustrait le résultat de 2 couches&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_subtract&#39;%(self.index)
+        self.layer = Subtract(name=self.name)
+        self.label = &#39;{Soustraction %d | {Shape | %s} | {Couche %d - Couche %d}}&#39;%(self.index,self.input_shape[0],self.input[0].index,self.input[1].index)
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.input)==list , &#39;Veuillez entrer une liste et non %s&#39;%(self.param[&#34;input&#34;])
+        assert False not in list(map(lambda x:x.output_shape==self.input[0].output_shape,self.input)) , &#39;2 layers du Subtract %d ne sont pas de même dimension %s&#39;%(self.index,list(map(lambda x:x.output_shape,self.input)))
+class G_Concatenate(G_Layer):
+    &#34;&#34;&#34;Concatène les entrées suivant le dernier axed des tenseurs&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_concatenate&#39;%(self.index)
+        self.layer = Concatenate(axis=-1,name=self.name)
+    def verif_param(self):
+        assert type(self.input)==list , &#39;Veuillez entrer une liste et non %s&#39;%(self.param[&#34;input&#34;])
+        assert False not in list(map(lambda x:x.output_shape==self.input[0].output_shape,self.input)) , &#39;2 layers du Concatenate %d ne sont pas de même dimension %s&#39;%(self.index,list(map(lambda x:x.output_shape,self.input)))
+class G_Reshape(G_Layer):
+    &#34;&#34;&#34;Remet en forme l&#39;entree&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_reshape&#39;%(self.index)
+        self.layer = Reshape(self.param[&#34;shape&#34;],name=self.name)
+        self.output_shape = self.param[&#34;shape&#34;]
+    def verif_param(self):
+        assert type(self.param[&#34;shape&#34;])==tuple , &#39;Veuillez entrer une liste et non %s&#39;%(self.param[&#34;shape&#34;])
+    </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="graph_keras.G_Activation"><code class="flex name class">
+<span>class <span class="ident">G_Activation</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Applique la fonction d'activation SELU</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Activation(G_Layer):
+    &#34;&#34;&#34;Applique la fonction d&#39;activation SELU&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_activation_SELU&#39;%(self.index)
+        self.layer = Activation(SELU,name=self.name)
+        self.label = &#39;{Activation %d | {Type | SELU}}&#39;%(self.index)
+        self.graph.node(self.index,self.label)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Add"><code class="flex name class">
+<span>class <span class="ident">G_Add</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Ajoute le résultat de plusieurs couches</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Add(G_Layer):
+    &#34;&#34;&#34;Ajoute le résultat de plusieurs couches&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_add&#39;%(self.index)
+        self.layer = Add(name=self.name)
+        self.label = &#39;{Addition %d | {Shape | %s} | {Couche %d - Couche %d}}&#39;%(self.index,self.input_shape[0],self.input[0].index,self.input[1].index)
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.input)==list , &#39;Veuillez entrer une liste et non %s&#39;%(self.param[&#34;input&#34;])
+        assert False not in list(map(lambda x:x.output_shape==self.input[0].output_shape,self.input)) , &#39;2 layers du Add %d ne sont pas de même dimension %s&#39;%(self.index,list(map(lambda x:x.output_shape,self.input)))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_BatchNorm"><code class="flex name class">
+<span>class <span class="ident">G_BatchNorm</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Normalisation par batch</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_BatchNorm(G_Layer):
+    &#34;&#34;&#34;Normalisation par batch&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_batchnorm&#39;%(self.index)
+        self.layer = BatchNormalization(name=self.name,trainable=True)
+        self.label = &#39;{Normalisation\npar\nBatch\n%d}&#39;%(self.index)
+        self.graph.node(self.index,self.label)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Concatenate"><code class="flex name class">
+<span>class <span class="ident">G_Concatenate</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Concatène les entrées suivant le dernier axed des tenseurs</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Concatenate(G_Layer):
+    &#34;&#34;&#34;Concatène les entrées suivant le dernier axed des tenseurs&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_concatenate&#39;%(self.index)
+        self.layer = Concatenate(axis=-1,name=self.name)
+    def verif_param(self):
+        assert type(self.input)==list , &#39;Veuillez entrer une liste et non %s&#39;%(self.param[&#34;input&#34;])
+        assert False not in list(map(lambda x:x.output_shape==self.input[0].output_shape,self.input)) , &#39;2 layers du Concatenate %d ne sont pas de même dimension %s&#39;%(self.index,list(map(lambda x:x.output_shape,self.input)))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Convolution"><code class="flex name class">
+<span>class <span class="ident">G_Convolution</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>k</i>: <b>int</b>, &gt; 0 noyau</li>
+<li><i>f</i>: <b>int</b>, &gt; 0 nb de filtres</li>
+<li><i>s</i>: <b>int</b>, &gt; 0 pas</li>
+</ul>
+<h1 id="illustration">Illustration</h1>
+<p>Avec strides à 1 et le padding SAME choisi ici :
+<img alt="" src="https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/full_padding_no_strides.gif">
+Source : <a href="https://github.com/vdumoulin/conv_arithmetic">vdumoulin github</a>
+Avec strides différent de 1 en descendant
+<img alt="" src="https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/padding_strides_odd.gif">
+Source : <a href="https://github.com/vdumoulin/conv_arithmetic">vdumoulin github</a></p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Convolution(G_Layer):
+    &#34;&#34;&#34;
+    #Arguments
+    - &lt;i&gt;k&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, &gt; 0 noyau
+    - &lt;i&gt;f&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, &gt; 0 nb de filtres
+    - &lt;i&gt;s&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, &gt; 0 pas
+    #Illustration
+    Avec strides à 1 et le padding SAME choisi ici :
+    ![](https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/full_padding_no_strides.gif)
+    Source : [vdumoulin github](https://github.com/vdumoulin/conv_arithmetic)
+    Avec strides différent de 1 en descendant
+    ![](https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/padding_strides_odd.gif)
+    Source : [vdumoulin github](https://github.com/vdumoulin/conv_arithmetic)
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = [   &#34;%d_conv_k%d_1_f%d&#34;%(self.index,self.param[&#34;k&#34;],self.param[&#34;f&#34;]),
+                        &#34;%d_conv_k1_%d_f%d&#34;%(self.index,self.param[&#34;k&#34;],self.param[&#34;f&#34;])]
+        couche1 = Convolution2D(filters=self.param[&#34;f&#34;],
+                                kernel_size=(self.param[&#34;k&#34;],1),
+                                activation=None,
+                                strides=(self.param[&#34;s&#34;],1),
+                                padding=&#39;SAME&#39;,
+                                name=self.name[0],
+                                trainable=True)
+        couche2 = Convolution2D(filters=self.param[&#34;f&#34;],
+                                kernel_size=(1,self.param[&#34;k&#34;]),
+                                activation=None,
+                                strides=(1,self.param[&#34;s&#34;]),
+                                padding=&#39;SAME&#39;,
+                                name=self.name[1],
+                                trainable=True)
+        self.layer = [couche1,couche2]
+        self.label = &#39;{Convolution %s | {Shape | %s} | {Noyau | %d} | {Filtres | %d} | {Strides | %d}}&#39;%(self.index, self.input_shape,self.param[&#34;k&#34;],self.param[&#34;f&#34;],self.param[&#34;s&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;k&#34;])==int , &#39;Veuillez entrer entier et non %s&#39;%(self.param[&#34;k&#34;])
+        assert type(self.param[&#34;f&#34;])==int , &#39;Veuillez entrer entier et non %s&#39;%(self.param[&#34;f&#34;])</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Deconv"><code class="flex name class">
+<span>class <span class="ident">G_Deconv</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Couche inverse de la couche de convolution</p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>k</i>: <b>int &gt; 0</b>, noyau</li>
+<li><i>f</i>: <b>int &gt; 0</b>, nombre de filtres</li>
+<li><i>strides</i>: <b>int &gt; 0 en général &gt; 1</b>, pas</li>
+</ul>
+<h1 id="illustration">Illustration</h1>
+<p><img alt="" src="https://raw.githubusercontent.com/vdumoulin/conv_arithmetic/master/gif/padding_strides_transposed.gif">
+Source : <a href="https://github.com/vdumoulin/conv_arithmetic">vdumoulin github</a></p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Deconv(G_Layer):
+    &#34;&#34;&#34;Couche inverse de la couche de convolution
+    #Arguments
+    - &lt;i&gt;k&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, noyau
+    - &lt;i&gt;f&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, nombre de filtres
+    - &lt;i&gt;strides&lt;/i&gt;: &lt;b&gt;int &gt; 0 en général &gt; 1&lt;/b&gt;, pas
+    #Illustration
+    ![](https://raw.githubusercontent.com/vdumoulin/conv_arithmetic/master/gif/padding_strides_transposed.gif)
+    Source : [vdumoulin github](https://github.com/vdumoulin/conv_arithmetic)
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_deconv_k%d_f%d&#39;%(self.index,self.param[&#34;k&#34;],self.param[&#34;f&#34;])
+        self.layer = Conv2DTranspose(filters=self.param[&#34;f&#34;],kernel_size=self.param[&#34;k&#34;], strides=self.param[&#34;strides&#34;],name=self.name,padding=&#39;VALID&#39;,trainable=True)
+        self.output_shape = (self.input_shape[0], (self.input_shape[1]-1)*self.param[&#34;strides&#34;]+self.param[&#34;k&#34;], (self.input_shape[1]-1)*self.param[&#34;strides&#34;]+self.param[&#34;k&#34;],self.input_shape[-1])
+        self.label = &#39;{Deconvolution %d | {Input Shape | %s} | {Output Shape | %s} | {Noyau | %d} | {Filtres | %d} | {Strides | %s}}&#39;%(self.index, self.input_shape, self.output_shape, self.param[&#34;k&#34;], self.param[&#34;f&#34;], self.param[&#34;strides&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;k&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;k&#34;])
+        assert type(self.param[&#34;f&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;f&#34;])
+        assert type(self.param[&#34;strides&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;strides&#34;])</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Dense"><code class="flex name class">
+<span>class <span class="ident">G_Dense</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Couche totalement connectée</p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>f</i>: <b>int &gt; 0</b>, nombre de filtres</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Dense(G_Layer):
+    &#34;&#34;&#34;Couche totalement connectée
+    #Arguments
+    - &lt;i&gt;f&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, nombre de filtres
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_dense_f%d&#39;%(self.index,self.param[&#34;f&#34;])
+        self.layer = Dense(self.param[&#34;f&#34;],activation=None,name=self.name,trainable=True)
+        self.label = &#39;{Dense %d | {Shape | %s} | {Filtres | %d}}&#39;%(self.index,self.input_shape,self.param[&#34;f&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;f&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;f&#34;])</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Dropout"><code class="flex name class">
+<span>class <span class="ident">G_Dropout</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>r</i>: <b>float</b>, 0 &lt; r &lt; 1 ou Input</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Dropout(G_Layer):
+    &#34;&#34;&#34;
+    #Arguments
+    - &lt;i&gt;r&lt;/i&gt;: &lt;b&gt;float&lt;/b&gt;, 0 &lt; r &lt; 1 ou Input
+    &#34;&#34;&#34;
+    def build_layer(self):
+        if type(self.param[&#39;rate&#39;]) != float:
+            self.rate = K.cast(self.param[&#39;rate&#39;][0,0],K.floatx())
+            self.name = &#39;%d_dropout_r_adaptative&#39;%(self.index)
+            self.label = &#39;{Dropout %d | {Rate | Adapté}}&#39;%(self.index)
+        else:
+            self.rate = self.param[&#39;rate&#39;]
+            self.name = &#39;%d_dropout_r%.2f&#39;%(self.index,self.rate)
+            self.label = &#39;{Dropout %d | {Rate | %f}}&#39;%(self.index,self.rate)
+        self.layer = Dropout(name=self.name,rate=self.rate,trainable=True)
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        print(&#34;ATTENTION : parametre non vérifié : le type du taux de dropout est il correct ? %s&#34;%(self.param[&#34;rate&#34;]))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Flat"><code class="flex name class">
+<span>class <span class="ident">G_Flat</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Mise en vecteur</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Flat(G_Layer):
+    &#34;&#34;&#34;Mise en vecteur&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_flatten&#39;%(self.index)
+        self.layer = Flatten(name=self.name)
+        self.output_shape = (self.input_shape[0],np.prod(self.input_shape[1:]))
+        self.label = &#39;{Flatten %d | {Input Shape | %s} | {Output Shape | %s}}&#39;%(self.index,self.input_shape,self.output_shape)
+        self.graph.node(self.index,self.label)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Graph"><code class="flex name class">
+<span>class <span class="ident">G_Graph</span></span>
+<span>(</span><span>list_nodes, list_names)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Couche ajoutant les fonctionnalités<br/>
+- Création d'un graph Graphviz<br/>
+- Utilisation de sous-cluster pour séparer des sous-ensemble comme le générateur du discriminateur<br/></p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>list_nodes</i>: cf attribut node </li>
+<li><i>list_names</i>: cf attribut names</li>
+</ul>
+<h1 id="attributs">Attributs</h1>
+<ul>
+<li><i>index_couche</i>: <b>int</b>, index de la couche courante</li>
+<li><i>index_graph</i>: <b>int</b>, index du graph courant</li>
+<li><i>graph</i>: <b>Digraph</b>, graph parent</li>
+<li><i>nodes</i>: <b>list de G_Layer</b>, couches du modèle <b>entrées dans l'ordre de définition</b></li>
+<li><i>names</i>: <b>list de string</b>, noms des couches <b>entrés dans le même ordre que pour nodes</b> sous la forme (indiqué sous forme regex) [+<em>]?nom1_color1
+[+</em>]?nom2_color2 [+*]?nom3_color3 du plus large graph au plus petit </li>
+<li><i>graph_list</i>: <b>list de Digraph</b>, liste des graphs successivement créés</li>
+<li><i>graph_names_list</i>: <b>list de string</b>, liste des noms de ces graph</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Graph:
+    &#34;&#34;&#34;
+    Couche ajoutant les fonctionnalités&lt;br/&gt;
+    - Création d&#39;un graph Graphviz&lt;br/&gt;
+    - Utilisation de sous-cluster pour séparer des sous-ensemble comme le générateur du discriminateur&lt;br/&gt;
+    #Arguments
+    - &lt;i&gt;list_nodes&lt;/i&gt;: cf attribut node 
+    - &lt;i&gt;list_names&lt;/i&gt;: cf attribut names
+    #Attributs
+    - &lt;i&gt;index_couche&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, index de la couche courante
+    - &lt;i&gt;index_graph&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, index du graph courant
+    - &lt;i&gt;graph&lt;/i&gt;: &lt;b&gt;Digraph&lt;/b&gt;, graph parent
+    - &lt;i&gt;nodes&lt;/i&gt;: &lt;b&gt;list de G_Layer&lt;/b&gt;, couches du modèle &lt;b&gt;entrées dans l&#39;ordre de définition&lt;/b&gt;
+    - &lt;i&gt;names&lt;/i&gt;: &lt;b&gt;list de string&lt;/b&gt;, noms des couches &lt;b&gt;entrés dans le même ordre que pour nodes&lt;/b&gt; sous la forme (indiqué sous forme regex) [+*]?nom1_color1  [+*]?nom2_color2 [+*]?nom3_color3 du plus large graph au plus petit 
+    - &lt;i&gt;graph_list&lt;/i&gt;: &lt;b&gt;list de Digraph&lt;/b&gt;, liste des graphs successivement créés
+    - &lt;i&gt;graph_names_list&lt;/i&gt;: &lt;b&gt;list de string&lt;/b&gt;, liste des noms de ces graph
+    &#34;&#34;&#34;
+    def __init__(self,list_nodes,list_names):
+        assert type(list_nodes)==list , &#39;Veuillez entrer une liste et non %s&#39;%(list_nodes)
+        assert type(list_names)==list , &#39;Veuillez entrer une liste et non %s&#39;%(list_names)
+        
+        self.index_couche = 0
+        self.index_graph = 0
+        self.graph = self.new_graph(&#34;transparent&#34;,&#34;LR&#34;,&#34;&#34;)
+        self.nodes = list_nodes
+        self.names = list_names
+        self.graph_list = [self.graph]
+        self.graph_names_list = []
+        
+    def build_graph_clusters(self):
+        &#34;&#34;&#34;Exploite les nom des couches pour construire les clusters indiqués (cf attribut names)&#34;&#34;&#34;
+        _,_,_,tmp_names = self.graph_list[:],self.graph_names_list[:],self.nodes[:],self.names[:]
+        for name_node in tmp_names:
+            if name_node != &#34;&#34;:#Si on a un sous-cluster
+                clusters = name_node.split(&#34; &#34;)#On choisit espace comme séparateur de sous-clusters ; + comme début de sous-cluster * comme fin (à placer au début du sous-cluster)
+                
+                for i,clust_name_bg in enumerate(clusters):
+                    clust_name = clust_name_bg.split(&#34;_&#34;)[0]
+                    clust_bg = clust_name_bg.split(&#34;_&#34;)[1]
+                    if clust_name[0] == &#34;+&#34;:
+                        self.new_graph(clust_bg,&#34;LR&#34;,clust_name)#Création d&#39;un sous-graph
+                    elif clust_name[0] == &#34;*&#34;:
+                        index_graph = self.graph_names_list.index(clust_name[1:])
+                        index_graph_prec = self.graph_names_list.index(clusters[i-1])
+                        self.graph_list[index_graph_prec].subgraph(self.graph_list[index_graph])#Ajout du cluster au graph plus élevé
+                        
+    def new_graph(self,bg_clr,dir,name):
+        &#34;&#34;&#34;Crée un nouveau cluster avec les paramètres et l ajoute à graph_list et graph_names_list
+        #Arguments
+        - &lt;i&gt;bg_clr&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, couleur de fond du cluster
+        - &lt;i&gt;dir&lt;/i&gt;: &lt;b&gt;enum string&lt;/b&gt;, LR ou TB direction du graph
+        - &lt;i&gt;name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom du graph 
+        &#34;&#34;&#34;
+        graph = Digraph(name=&#34;cluster_Graph%d&#34;%(self.index_graph),format=&#39;png&#39;)
+        graph.attr(style=&#39;filled&#39;,label=name)
+        graph.attr(bgcolor=bg_clr)
+        graph.attr(rankdir=dir)
+        self.graph_list.append(graph)
+        self.graph_names_list.append(name)
+        self.index_graph += 1
+        return graph
+    def render_graph(self,name):
+        &#34;&#34;&#34;Fait le rendu du graph avec le nom de graph indiqué&#34;&#34;&#34;
+        assert type(name)==str , &#39;Veuillez entrer une chaine de caractères et non %s&#39;%(name)
+        self.graph.render(name)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="graph_keras.G_Graph.build_graph_clusters"><code class="name flex">
+<span>def <span class="ident">build_graph_clusters</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Exploite les nom des couches pour construire les clusters indiqués (cf attribut names)</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def build_graph_clusters(self):
+    &#34;&#34;&#34;Exploite les nom des couches pour construire les clusters indiqués (cf attribut names)&#34;&#34;&#34;
+    _,_,_,tmp_names = self.graph_list[:],self.graph_names_list[:],self.nodes[:],self.names[:]
+    for name_node in tmp_names:
+        if name_node != &#34;&#34;:#Si on a un sous-cluster
+            clusters = name_node.split(&#34; &#34;)#On choisit espace comme séparateur de sous-clusters ; + comme début de sous-cluster * comme fin (à placer au début du sous-cluster)
+            
+            for i,clust_name_bg in enumerate(clusters):
+                clust_name = clust_name_bg.split(&#34;_&#34;)[0]
+                clust_bg = clust_name_bg.split(&#34;_&#34;)[1]
+                if clust_name[0] == &#34;+&#34;:
+                    self.new_graph(clust_bg,&#34;LR&#34;,clust_name)#Création d&#39;un sous-graph
+                elif clust_name[0] == &#34;*&#34;:
+                    index_graph = self.graph_names_list.index(clust_name[1:])
+                    index_graph_prec = self.graph_names_list.index(clusters[i-1])
+                    self.graph_list[index_graph_prec].subgraph(self.graph_list[index_graph])#Ajout du cluster au graph plus élevé</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Graph.new_graph"><code class="name flex">
+<span>def <span class="ident">new_graph</span></span>(<span>self, bg_clr, dir, name)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Crée un nouveau cluster avec les paramètres et l ajoute à graph_list et graph_names_list</p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>bg_clr</i>: <b>string</b>, couleur de fond du cluster</li>
+<li><i>dir</i>: <b>enum string</b>, LR ou TB direction du graph</li>
+<li><i>name</i>: <b>string</b>, nom du graph</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def new_graph(self,bg_clr,dir,name):
+    &#34;&#34;&#34;Crée un nouveau cluster avec les paramètres et l ajoute à graph_list et graph_names_list
+    #Arguments
+    - &lt;i&gt;bg_clr&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, couleur de fond du cluster
+    - &lt;i&gt;dir&lt;/i&gt;: &lt;b&gt;enum string&lt;/b&gt;, LR ou TB direction du graph
+    - &lt;i&gt;name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom du graph 
+    &#34;&#34;&#34;
+    graph = Digraph(name=&#34;cluster_Graph%d&#34;%(self.index_graph),format=&#39;png&#39;)
+    graph.attr(style=&#39;filled&#39;,label=name)
+    graph.attr(bgcolor=bg_clr)
+    graph.attr(rankdir=dir)
+    self.graph_list.append(graph)
+    self.graph_names_list.append(name)
+    self.index_graph += 1
+    return graph</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Graph.render_graph"><code class="name flex">
+<span>def <span class="ident">render_graph</span></span>(<span>self, name)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Fait le rendu du graph avec le nom de graph indiqué</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def render_graph(self,name):
+    &#34;&#34;&#34;Fait le rendu du graph avec le nom de graph indiqué&#34;&#34;&#34;
+    assert type(name)==str , &#39;Veuillez entrer une chaine de caractères et non %s&#39;%(name)
+    self.graph.render(name)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="graph_keras.G_Input"><code class="flex name class">
+<span>class <span class="ident">G_Input</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Construit une entree du reseau</p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>name</i>: <b>string</b>, nom</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Input(G_Layer):
+    &#34;&#34;&#34;Construit une entree du reseau
+    #Arguments
+    - &lt;i&gt;name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom
+    &#34;&#34;&#34;
+    def verif_param(self):
+        assert type(self.param[&#34;name&#34;])==str , &#39;Veuillez entrer une chaine de caractere et non %s&#39;%(self.param[&#34;name&#34;])
+    def build_layer(self):
+        self.name = &#34;%d_%s&#34;%(self.index,self.param[&#34;name&#34;])
+        self.layer = Input(shape=self.input_shape, name=self.name)
+        self.label = &#39;{Input\n%s|{Shape | %s}}&#39;%(self.param[&#34;name&#34;],self.input_shape)
+        self.graph.node(self.index,self.label)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Layer"><code class="flex name class">
+<span>class <span class="ident">G_Layer</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Représente un layer quelconque</p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>dico_param</i>: <b>dictionnaire</b>, dépend du layer</li>
+<li><i>index</i>: <b>int</b>, index du précédent layer</li>
+<li><i>cluster_name</i>: <b>string</b>, nom du cluster</li>
+<li><i>cluster_bg</i>: <b>string</b>, couleur du cluster graphviz (cf doc graphviz pour valeurs autorisées)</li>
+<li><i>draw</i>: <b>bool</b>, Indique si le layer doit être dessiné par graphviz</li>
+</ul>
+<h1 id="attributs">Attributs</h1>
+<ul>
+<li><i>index</i>: <b>int</b>, index de la couche courante</li>
+<li><i>draw</i>: <b>bool</b>, Indique si le layer doit être dessiné par graphviz</li>
+<li><i>layer</i>: <b>layer Keras</b>, à évaluer pour avoir la sortie</li>
+<li><i>param</i>: <b>dictionnaire</b>, paramètres passés en argument, dépendent de la couche, vérifiés par verif_param</li>
+<li><i>output</i>: <b>None ou sortie de couche Keras</b>, None = non évalué ; après appel de <b>eval</b> contient la sortie de la couche évaluée</li>
+<li><i>name</i>: <b>string</b>, nom du layer keras ; défini après appel de <b>build_layer</b></li>
+<li><i>input</i>: <b>G_Layer</b>, entrée du modèle</li>
+<li><i>output_shape</i>: <b>tuple</b>, forme de sortie calculée théoriquement</li>
+<li><i>label</i>: <b>string</b>, texte affiché par graphviz pour la couche</li>
+<li><i>graph</i>: <b>Digraph</b>, graph dans lequel est compris la couche</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Layer:
+    &#34;&#34;&#34;Représente un layer quelconque
+        #Arguments
+        - &lt;i&gt;dico_param&lt;/i&gt;: &lt;b&gt;dictionnaire&lt;/b&gt;, dépend du layer
+        - &lt;i&gt;index&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, index du précédent layer
+        - &lt;i&gt;cluster_name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom du cluster
+        - &lt;i&gt;cluster_bg&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, couleur du cluster graphviz (cf doc graphviz pour valeurs autorisées)
+        - &lt;i&gt;draw&lt;/i&gt;: &lt;b&gt;bool&lt;/b&gt;, Indique si le layer doit être dessiné par graphviz
+        #Attributs
+        - &lt;i&gt;index&lt;/i&gt;: &lt;b&gt;int&lt;/b&gt;, index de la couche courante
+        - &lt;i&gt;draw&lt;/i&gt;: &lt;b&gt;bool&lt;/b&gt;, Indique si le layer doit être dessiné par graphviz
+        - &lt;i&gt;layer&lt;/i&gt;: &lt;b&gt;layer Keras&lt;/b&gt;, à évaluer pour avoir la sortie
+        - &lt;i&gt;param&lt;/i&gt;: &lt;b&gt;dictionnaire&lt;/b&gt;, paramètres passés en argument, dépendent de la couche, vérifiés par verif_param
+        - &lt;i&gt;output&lt;/i&gt;: &lt;b&gt;None ou sortie de couche Keras&lt;/b&gt;, None = non évalué ; après appel de &lt;b&gt;eval&lt;/b&gt; contient la sortie de la couche évaluée
+        - &lt;i&gt;name&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, nom du layer keras ; défini après appel de &lt;b&gt;build_layer&lt;/b&gt;
+        - &lt;i&gt;input&lt;/i&gt;: &lt;b&gt;G_Layer&lt;/b&gt;, entrée du modèle
+        - &lt;i&gt;output_shape&lt;/i&gt;: &lt;b&gt;tuple&lt;/b&gt;, forme de sortie calculée théoriquement
+        - &lt;i&gt;label&lt;/i&gt;: &lt;b&gt;string&lt;/b&gt;, texte affiché par graphviz pour la couche
+        - &lt;i&gt;graph&lt;/i&gt;: &lt;b&gt;Digraph&lt;/b&gt;, graph dans lequel est compris la couche
+    &#34;&#34;&#34;
+    def __init__(self,dico_param,index,cluster_name, cluster_bg,draw=True):
+        
+        assert type(index) == str,&#34;Veuillez entrer un entier comme index de la couche et non %s&#34;%(index)
+        self.index = index+1
+        self.draw = draw
+        self.layer = None
+        self.param = dico_param
+        self.output = None
+        self.name = None
+        self.input = None
+        self.input_shape = None
+        self.output_shape = None
+        #Graphviz parameter
+        self.label = &#34;&#34;
+        self.graph = None
+        return self
+    def set_input(self,input):
+        &#34;&#34;&#34;Specifie l entree de la couche, sa forme. Verifie que les arguments sont bien ceux attendus : &lt;b&gt;Fonction à appeler après build_layer et donc build_and_graph&lt;/b&gt;
+        #Arguments
+        - &lt;i&gt;input_dic&lt;/i&gt;: &lt;b&gt;G_Layer&lt;/b&gt;, entree
+        &#34;&#34;&#34;
+        self.input = input
+        self.input_shape = input.output_shape
+        self.output_shape = self.input_shape
+        self.verif_param()
+        return self
+    def set_graph(self,graph):
+        &#34;&#34;&#34;Specifie le graph de la couche : &lt;b&gt;Fonction à appeler avant build_and_graph&lt;/b&gt;
+        #Arguments
+        - &lt;i&gt;graph&lt;/i&gt;: &lt;b&gt;Digraph&lt;/b&gt;, graph de la couche
+        &#34;&#34;&#34;
+        self.graph = graph
+
+    def build_and_graph(self):
+        &#34;&#34;&#34;Fait le lien sur le graph entre la couche précédante et la couche courante si la couche doit être dessinée&#34;&#34;&#34;
+        if self.draw == True:
+            self.build_layer()
+            #Graphviz links
+            if type(self.input)==list:#Pour les layers Concatenate, Add, Subtract
+                for layer in self.input:#Permet d&#39;avoir un nb qlconque de layers en entrée notamment pour le Concatenate
+                    self.graph.edge(layer.index,self.index)
+            else:
+                self.graph.edge(self.input.index,self.index)
+    def build_layer(self):
+        &#34;&#34;&#34;Construit la couche : Surchargée par les fils&#34;&#34;&#34;
+        print(&#34;Erreur de définition de build_layer pour l&#39;index %d&#34;%(self.index))
+        pass
+    def verif_param(self):
+        &#34;&#34;&#34;Verifie que les arguments sont bien ceux attendus : Surchargée par les fils&#34;&#34;&#34;
+        print(&#34;Erreur de définition de verif_param pour l&#39;index %d&#34;%(self.index))
+        pass
+    def identifie(self):
+        &#34;&#34;&#34;Affiche le nom de la couche ou un message d&#39;erreur&#34;&#34;&#34;
+        if type(self.name) == str:
+            print(&#34;Je suis &#34;,self.name)
+        elif type(self.name) == list:
+            print(&#34;Je suis &#34;,self.name[0],&#34; et &#34;,self.name[1])
+        else:
+            print(&#34;Je suis quelque chose .... d&#39;inconnu : &#34;,self.name)
+    def trainable(self,is_trainable):
+        &#34;&#34;&#34;Indique si la couche est entrainable ou non &lt;b&gt;is_trainable&lt;/b&gt; booleen&#34;&#34;&#34;
+        if type(self.layer) == list:
+            for l in self.layer:
+                l.trainable = False
+        else:
+            l.trainable = False
+    def eval(self):
+        &#34;&#34;&#34;Utilise l input pour evaluer la sortie de la couche. (Fonctionnalité en + voir le code)&#34;&#34;&#34;
+        sortie = self.input.layer
+        if type(self.layer) == list:
+            for l in self.layer:
+                sortie = l(sortie)
+            self.output = sortie
+        else:
+            self.output = l(sortie)
+        return self.output</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Activation" href="#graph_keras.G_Activation">G_Activation</a></li>
+<li><a title="graph_keras.G_Add" href="#graph_keras.G_Add">G_Add</a></li>
+<li><a title="graph_keras.G_BatchNorm" href="#graph_keras.G_BatchNorm">G_BatchNorm</a></li>
+<li><a title="graph_keras.G_Concatenate" href="#graph_keras.G_Concatenate">G_Concatenate</a></li>
+<li><a title="graph_keras.G_Convolution" href="#graph_keras.G_Convolution">G_Convolution</a></li>
+<li><a title="graph_keras.G_Deconv" href="#graph_keras.G_Deconv">G_Deconv</a></li>
+<li><a title="graph_keras.G_Dense" href="#graph_keras.G_Dense">G_Dense</a></li>
+<li><a title="graph_keras.G_Dropout" href="#graph_keras.G_Dropout">G_Dropout</a></li>
+<li><a title="graph_keras.G_Flat" href="#graph_keras.G_Flat">G_Flat</a></li>
+<li><a title="graph_keras.G_Input" href="#graph_keras.G_Input">G_Input</a></li>
+<li><a title="graph_keras.G_Lrn" href="#graph_keras.G_Lrn">G_Lrn</a></li>
+<li><a title="graph_keras.G_Pool" href="#graph_keras.G_Pool">G_Pool</a></li>
+<li><a title="graph_keras.G_Proba" href="#graph_keras.G_Proba">G_Proba</a></li>
+<li><a title="graph_keras.G_Reshape" href="#graph_keras.G_Reshape">G_Reshape</a></li>
+<li><a title="graph_keras.G_Subtract" href="#graph_keras.G_Subtract">G_Subtract</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="graph_keras.G_Layer.build_and_graph"><code class="name flex">
+<span>def <span class="ident">build_and_graph</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Fait le lien sur le graph entre la couche précédante et la couche courante si la couche doit être dessinée</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def build_and_graph(self):
+    &#34;&#34;&#34;Fait le lien sur le graph entre la couche précédante et la couche courante si la couche doit être dessinée&#34;&#34;&#34;
+    if self.draw == True:
+        self.build_layer()
+        #Graphviz links
+        if type(self.input)==list:#Pour les layers Concatenate, Add, Subtract
+            for layer in self.input:#Permet d&#39;avoir un nb qlconque de layers en entrée notamment pour le Concatenate
+                self.graph.edge(layer.index,self.index)
+        else:
+            self.graph.edge(self.input.index,self.index)</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Layer.build_layer"><code class="name flex">
+<span>def <span class="ident">build_layer</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Construit la couche : Surchargée par les fils</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def build_layer(self):
+    &#34;&#34;&#34;Construit la couche : Surchargée par les fils&#34;&#34;&#34;
+    print(&#34;Erreur de définition de build_layer pour l&#39;index %d&#34;%(self.index))
+    pass</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Layer.eval"><code class="name flex">
+<span>def <span class="ident">eval</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Utilise l input pour evaluer la sortie de la couche. (Fonctionnalité en + voir le code)</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def eval(self):
+    &#34;&#34;&#34;Utilise l input pour evaluer la sortie de la couche. (Fonctionnalité en + voir le code)&#34;&#34;&#34;
+    sortie = self.input.layer
+    if type(self.layer) == list:
+        for l in self.layer:
+            sortie = l(sortie)
+        self.output = sortie
+    else:
+        self.output = l(sortie)
+    return self.output</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Layer.identifie"><code class="name flex">
+<span>def <span class="ident">identifie</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Affiche le nom de la couche ou un message d'erreur</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def identifie(self):
+    &#34;&#34;&#34;Affiche le nom de la couche ou un message d&#39;erreur&#34;&#34;&#34;
+    if type(self.name) == str:
+        print(&#34;Je suis &#34;,self.name)
+    elif type(self.name) == list:
+        print(&#34;Je suis &#34;,self.name[0],&#34; et &#34;,self.name[1])
+    else:
+        print(&#34;Je suis quelque chose .... d&#39;inconnu : &#34;,self.name)</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Layer.set_graph"><code class="name flex">
+<span>def <span class="ident">set_graph</span></span>(<span>self, graph)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Specifie le graph de la couche : <b>Fonction à appeler avant build_and_graph</b></p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>graph</i>: <b>Digraph</b>, graph de la couche</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_graph(self,graph):
+    &#34;&#34;&#34;Specifie le graph de la couche : &lt;b&gt;Fonction à appeler avant build_and_graph&lt;/b&gt;
+    #Arguments
+    - &lt;i&gt;graph&lt;/i&gt;: &lt;b&gt;Digraph&lt;/b&gt;, graph de la couche
+    &#34;&#34;&#34;
+    self.graph = graph</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Layer.set_input"><code class="name flex">
+<span>def <span class="ident">set_input</span></span>(<span>self, input)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Specifie l entree de la couche, sa forme. Verifie que les arguments sont bien ceux attendus : <b>Fonction à appeler après build_layer et donc build_and_graph</b></p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>input_dic</i>: <b>G_Layer</b>, entree</li>
+</ul></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_input(self,input):
+    &#34;&#34;&#34;Specifie l entree de la couche, sa forme. Verifie que les arguments sont bien ceux attendus : &lt;b&gt;Fonction à appeler après build_layer et donc build_and_graph&lt;/b&gt;
+    #Arguments
+    - &lt;i&gt;input_dic&lt;/i&gt;: &lt;b&gt;G_Layer&lt;/b&gt;, entree
+    &#34;&#34;&#34;
+    self.input = input
+    self.input_shape = input.output_shape
+    self.output_shape = self.input_shape
+    self.verif_param()
+    return self</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Layer.trainable"><code class="name flex">
+<span>def <span class="ident">trainable</span></span>(<span>self, is_trainable)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Indique si la couche est entrainable ou non <b>is_trainable</b> booleen</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def trainable(self,is_trainable):
+    &#34;&#34;&#34;Indique si la couche est entrainable ou non &lt;b&gt;is_trainable&lt;/b&gt; booleen&#34;&#34;&#34;
+    if type(self.layer) == list:
+        for l in self.layer:
+            l.trainable = False
+    else:
+        l.trainable = False</code></pre>
+</details>
+</dd>
+<dt id="graph_keras.G_Layer.verif_param"><code class="name flex">
+<span>def <span class="ident">verif_param</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Verifie que les arguments sont bien ceux attendus : Surchargée par les fils</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def verif_param(self):
+    &#34;&#34;&#34;Verifie que les arguments sont bien ceux attendus : Surchargée par les fils&#34;&#34;&#34;
+    print(&#34;Erreur de définition de verif_param pour l&#39;index %d&#34;%(self.index))
+    pass</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="graph_keras.G_Lrn"><code class="flex name class">
+<span>class <span class="ident">G_Lrn</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p><img alt="" src="https://miro.medium.com/max/1918/1*MFl0tPjwvc49HirAJZPhEA.png"></p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>n</i>: <b>int &gt;0</b>, neighborhood length i.e. how many consecutive pixel values need to be considered while carrying out the normalization</li>
+<li><i>k</i>: <b>float</b>, offset (usually positive to avoid dividing by 0).</li>
+<li><i>a</i>: <b>float</b>, scale factor, usually positive</li>
+<li><i>b</i>: <b>float</b>, exponent</li>
+</ul>
+<h1 id="reference">Reference</h1>
+<p><a href="https://towardsdatascience.com/difference-between-local-response-normalization-and-batch-normalization-272308c034ac">Difference between Local Response Normalization and Batch Normalization</a></p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Lrn(G_Layer):
+    &#34;&#34;&#34;![](https://miro.medium.com/max/1918/1*MFl0tPjwvc49HirAJZPhEA.png)
+    #Arguments
+    - &lt;i&gt;n&lt;/i&gt;: &lt;b&gt;int &gt;0&lt;/b&gt;, neighborhood length i.e. how many consecutive pixel values need to be considered while carrying out the normalization
+    - &lt;i&gt;k&lt;/i&gt;: &lt;b&gt;float&lt;/b&gt;, offset (usually positive to avoid dividing by 0).
+    - &lt;i&gt;a&lt;/i&gt;: &lt;b&gt;float&lt;/b&gt;, scale factor, usually positive
+    - &lt;i&gt;b&lt;/i&gt;: &lt;b&gt;float&lt;/b&gt;, exponent
+    #Reference
+    [Difference between Local Response Normalization and Batch Normalization](https://towardsdatascience.com/difference-between-local-response-normalization-and-batch-normalization-272308c034ac)
+
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_lrn_n%d_k%d_a%.2e_b%.2f&#39;%(self.index,self.param[&#34;n&#34;],self.param[&#34;k&#34;],self.param[&#34;a&#34;],self.param[&#34;b&#34;])
+        self.layer = LRN2D(n=self.param[&#34;n&#34;],k=self.param[&#34;k&#34;],alpha=self.param[&#34;a&#34;],beta=self.param[&#34;b&#34;],name=self.name)
+        self.label = &#39;{Regularisation\nRéponse\nLocale\n%s | {Noyau | %d} | {k | %.2f} | {alpha | %.2e} | {beta | %.2e}}&#39;%(self.index,self.param[&#34;n&#34;],self.param[&#34;k&#34;],self.param[&#34;a&#34;],self.param[&#34;b&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;n&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;n&#34;])
+        assert type(self.param[&#34;k&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;k&#34;])
+        assert type(self.param[&#34;a&#34;])==float , &#39;Veuillez entrer un flotant et non %s&#39;%(self.param[&#34;a&#34;])
+        assert type(self.param[&#34;b&#34;])==float , &#39;Veuillez entrer un flotant et non %s&#39;%(self.param[&#34;b&#34;])</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Pool"><code class="flex name class">
+<span>class <span class="ident">G_Pool</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Couche de max-pooling uniquement pour le moment. Par défaut le pas (strides) est de deux avec keras.</p>
+<h1 id="arguments">Arguments</h1>
+<ul>
+<li><i>f</i>: <b>int &gt; 0</b>, nombre de filtres</li>
+<li><i>k</i>: <b>int &gt; 0</b>, noyau</li>
+</ul>
+<h1 id="illustration">Illustration</h1>
+<p>En appliquant soit le max soit la moyenne
+<img alt="" src="https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/no_padding_no_strides.gif">
+Source : <a href="https://github.com/vdumoulin/conv_arithmetic">vdumoulin github</a></p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Pool(G_Layer):
+    &#34;&#34;&#34;Couche de max-pooling uniquement pour le moment. Par défaut le pas (strides) est de deux avec keras.
+    #Arguments
+    - &lt;i&gt;f&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, nombre de filtres
+    - &lt;i&gt;k&lt;/i&gt;: &lt;b&gt;int &gt; 0&lt;/b&gt;, noyau
+    #Illustration
+    En appliquant soit le max soit la moyenne
+    ![](https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/no_padding_no_strides.gif)
+    Source : [vdumoulin github](https://github.com/vdumoulin/conv_arithmetic)
+    &#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_max_p_k%d&#39;%(self.index,self.param[&#34;k&#34;])
+        self.layer = MaxPooling2D(name=self.name,pool_size=self.param[&#34;k&#34;],padding=&#39;VALID&#39;,trainable=True)
+        self.output_shape = (self.input_shape[0],(self.param[&#34;k&#34;] - self.input_shape[-1]) + 1,(self.param[&#34;k&#34;] - self.input_shape[-1]) + 1,self.input_shape[-1])
+        self.label = &#39;{MaxPooling %d | { Input Shape | %s} | {Output Shape | %s} | {Noyau | %d}}&#39;%(self.index,self.input_shape,self.output_shape,self.param[&#34;k&#34;])
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.param[&#34;k&#34;])==int , &#39;Veuillez entrer un entier et non %s&#39;%(self.param[&#34;k&#34;])</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Proba"><code class="flex name class">
+<span>class <span class="ident">G_Proba</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Application de a fonction sigmoide interprétée comme probabilité</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Proba(G_Layer):
+    &#34;&#34;&#34;Application de a fonction sigmoide interprétée comme probabilité&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_sigmoid_proba&#39;%(self.index)
+        self.layer = Activation(&#39;sigmoid&#39;,name=self.name)
+        self.label = &#39;{Sigmoïde %d}&#39;%(self.index)
+        self.graph.node(self.index,self.label)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Reshape"><code class="flex name class">
+<span>class <span class="ident">G_Reshape</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Remet en forme l'entree</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Reshape(G_Layer):
+    &#34;&#34;&#34;Remet en forme l&#39;entree&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_reshape&#39;%(self.index)
+        self.layer = Reshape(self.param[&#34;shape&#34;],name=self.name)
+        self.output_shape = self.param[&#34;shape&#34;]
+    def verif_param(self):
+        assert type(self.param[&#34;shape&#34;])==tuple , &#39;Veuillez entrer une liste et non %s&#39;%(self.param[&#34;shape&#34;])</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="graph_keras.G_Subtract"><code class="flex name class">
+<span>class <span class="ident">G_Subtract</span></span>
+<span>(</span><span>dico_param, index, cluster_name, cluster_bg, draw=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Soustrait le résultat de 2 couches</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class G_Subtract(G_Layer):
+    &#34;&#34;&#34;Soustrait le résultat de 2 couches&#34;&#34;&#34;
+    def build_layer(self):
+        self.name = &#39;%d_subtract&#39;%(self.index)
+        self.layer = Subtract(name=self.name)
+        self.label = &#39;{Soustraction %d | {Shape | %s} | {Couche %d - Couche %d}}&#39;%(self.index,self.input_shape[0],self.input[0].index,self.input[1].index)
+        self.graph.node(self.index,self.label)
+    def verif_param(self):
+        assert type(self.input)==list , &#39;Veuillez entrer une liste et non %s&#39;%(self.param[&#34;input&#34;])
+        assert False not in list(map(lambda x:x.output_shape==self.input[0].output_shape,self.input)) , &#39;2 layers du Subtract %d ne sont pas de même dimension %s&#39;%(self.index,list(map(lambda x:x.output_shape,self.input)))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="graph_keras.G_Activation" href="#graph_keras.G_Activation">G_Activation</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Add" href="#graph_keras.G_Add">G_Add</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_BatchNorm" href="#graph_keras.G_BatchNorm">G_BatchNorm</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Concatenate" href="#graph_keras.G_Concatenate">G_Concatenate</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Convolution" href="#graph_keras.G_Convolution">G_Convolution</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Deconv" href="#graph_keras.G_Deconv">G_Deconv</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Dense" href="#graph_keras.G_Dense">G_Dense</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Dropout" href="#graph_keras.G_Dropout">G_Dropout</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Flat" href="#graph_keras.G_Flat">G_Flat</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Graph" href="#graph_keras.G_Graph">G_Graph</a></code></h4>
+<ul class="">
+<li><code><a title="graph_keras.G_Graph.build_graph_clusters" href="#graph_keras.G_Graph.build_graph_clusters">build_graph_clusters</a></code></li>
+<li><code><a title="graph_keras.G_Graph.new_graph" href="#graph_keras.G_Graph.new_graph">new_graph</a></code></li>
+<li><code><a title="graph_keras.G_Graph.render_graph" href="#graph_keras.G_Graph.render_graph">render_graph</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Input" href="#graph_keras.G_Input">G_Input</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Layer" href="#graph_keras.G_Layer">G_Layer</a></code></h4>
+<ul class="two-column">
+<li><code><a title="graph_keras.G_Layer.build_and_graph" href="#graph_keras.G_Layer.build_and_graph">build_and_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.build_layer" href="#graph_keras.G_Layer.build_layer">build_layer</a></code></li>
+<li><code><a title="graph_keras.G_Layer.eval" href="#graph_keras.G_Layer.eval">eval</a></code></li>
+<li><code><a title="graph_keras.G_Layer.identifie" href="#graph_keras.G_Layer.identifie">identifie</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_graph" href="#graph_keras.G_Layer.set_graph">set_graph</a></code></li>
+<li><code><a title="graph_keras.G_Layer.set_input" href="#graph_keras.G_Layer.set_input">set_input</a></code></li>
+<li><code><a title="graph_keras.G_Layer.trainable" href="#graph_keras.G_Layer.trainable">trainable</a></code></li>
+<li><code><a title="graph_keras.G_Layer.verif_param" href="#graph_keras.G_Layer.verif_param">verif_param</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Lrn" href="#graph_keras.G_Lrn">G_Lrn</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Pool" href="#graph_keras.G_Pool">G_Pool</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Proba" href="#graph_keras.G_Proba">G_Proba</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Reshape" href="#graph_keras.G_Reshape">G_Reshape</a></code></h4>
+</li>
+<li>
+<h4><code><a title="graph_keras.G_Subtract" href="#graph_keras.G_Subtract">G_Subtract</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
